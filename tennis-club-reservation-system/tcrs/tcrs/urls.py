@@ -18,5 +18,5 @@ from django.urls import path, include  # new
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("app.urls")),  # new
+    path("", include("app.urls")),  # page loaded first to user
 ]    

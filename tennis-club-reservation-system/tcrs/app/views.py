@@ -9,3 +9,6 @@ class HomePageView(TemplateView):   # method call for home page template
 
 class AccountPageView(TemplateView):  # method call for account page template
     template_name = "accounts.html"
+
+class ReservationPageView(TemplateView):  # method call for reservation page template
+    template_name = "reservations.html"
