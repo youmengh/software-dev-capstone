@@ -12,3 +12,6 @@ class AccountPageView(TemplateView):  # method call for account page template
 
 class ReservationPageView(TemplateView):  # method call for reservation page template
     template_name = "reservations.html"
+
+class PaymentPageView(TemplateView):  # method call for payment page template
+    template_name = "payment.html"
