@@ -23,13 +23,14 @@ jobs:
   migrations:
     runs-on: ubuntu-latest
     steps:
-    - name: Make Migrations
-      uses: actions/checkout@v2
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py makemigrations
+      - uses: actions/checkout@v2
+    
+      - name: Make Migrations
+        working-directory: tennis-club-reservation-system/tcrs
+        run: 
+          python manage.py makemigrations
 
-    - name: Migrate
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py migrate
+      - name: Migrate
+        working-directory: tennis-club-reservation-system/tcrs
+        run: 
+          python manage.py migrate
