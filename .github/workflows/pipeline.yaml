@@ -7,29 +7,32 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   # build source for unit tests
   install:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      working-directory: tennis-club-reservation-system
-      run: pip install -r requirements.txt
-  
+      - name: Install dependencies
+        working-directory: tennis-club-reservation-system
+        run: pip install -r requirements.txt
+
   # build shared objects
   migrations:
     runs-on: ubuntu-latest
     steps:
-    - name: Make Migrations
-      uses: actions/checkout@v2
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py makemigrations
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Migrate
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py migrate
+      - name: Make Migrations
+        working-directory: tennis-club-reservation-system/tcrs
+        run: |
+          pip install -r requirements.txt
+          python manage.py makemigrations
+
+      - name: Migrate
+        working-directory: tennis-club-reservation-system/tcrs
+        run: |
+          pip install -r requirements.txt
+          python manage.py migrate
