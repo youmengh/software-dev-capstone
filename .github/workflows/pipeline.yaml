@@ -23,7 +23,9 @@ jobs:
   migrations:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+    
+      - name: Checkout code
+        uses: actions/checkout@v2
     
       - name: Make Migrations
         working-directory: tennis-club-reservation-system/tcrs
