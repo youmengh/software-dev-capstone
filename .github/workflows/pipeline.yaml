@@ -7,30 +7,47 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   # build source for unit tests
   install:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      working-directory: tennis-club-reservation-system
-      run: pip install -r requirements.txt
-  
+      - name: Install dependencies
+        working-directory: tennis-club-reservation-system
+        run: pip install -r requirements.txt
+
+      - name: Run linting
+        working-directory: tennis-club-reservation-system
+        run: |
+          pip install pylint
+          pylint tcrs/
+
+      - name: Run unit tests
+        working-directory: tennis-club-reservation-system
+        run: |
+          pip install pytest
+          pytest
+
   # build shared objects
   migrations:
+    name: "Make and run database migrations"
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Make Migrations
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py makemigrations
+      - name: Make Migrations
+        working-directory: tennis-club-reservation-system/tcrs
+        env:
+          DJANGO_SETTINGS_MODULE: tcrs.settings
+        run: |
+          python manage.py makemigrations
 
-    - name: Migrate
-      working-directory: tennis-club-reservation-system/tcrs
-      run: 
-        python manage.py migrate
+      - name: Migrate
+        working-directory: tennis-club-reservation-system/tcrs
+        env:
+          DJANGO_SETTINGS_MODULE: tcrs.settings
+        run: |
+          python manage.py migrate
