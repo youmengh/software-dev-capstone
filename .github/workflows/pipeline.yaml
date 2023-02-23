@@ -18,3 +18,18 @@ jobs:
     - name: Install dependencies
       working-directory: tennis-club-reservation-system
       run: pip install -r requirements.txt
+  
+  # build shared objects
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Make Migrations
+      uses: actions/checkout@v2
+      working-directory: tennis-club-reservation-system/tcrs
+      run: 
+        python manage.py makemigrations
+
+    - name: Migrate
+      working-directory: tennis-club-reservation-system/tcrs
+      run: 
+        python manage.py migrate
