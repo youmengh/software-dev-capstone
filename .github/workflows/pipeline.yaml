@@ -1,0 +1,36 @@
+name: TCRS CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  # build source for unit tests
+  install:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      working-directory: tennis-club-reservation-system
+      run: pip install -r requirements.txt
+  
+  # build shared objects
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+      uses: actions/checkout@v2
+
+    - name: Make Migrations
+      working-directory: tennis-club-reservation-system/tcrs
+      run: 
+        python manage.py makemigrations
+
+    - name: Migrate
+      working-directory: tennis-club-reservation-system/tcrs
+      run: 
+        python manage.py migrate
