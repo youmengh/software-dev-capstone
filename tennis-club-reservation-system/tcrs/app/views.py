@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import test
+from .models import Test
 
 # Create your views here.
 # Function-based views defined here
@@ -9,7 +9,14 @@ from .models import test
 def home_page(request):
     # template path
     template_name = 'home.html'
-    return render(request, template_name)
+
+    # DISPLAYING TEST MODEL (NOT PERMANENT)
+    messages = Test.objects.all()
+    context = {
+        'messages': messages
+    }
+
+    return render(request, template_name, context)
 
 def account_page(request):
     # template path
