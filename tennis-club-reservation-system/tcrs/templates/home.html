@@ -1,15 +1,32 @@
 {% extends "base.html" %} <!--Uses base.html to generate header with link-->
 {% block content %}
 
-<h1>Welcome!</h1>
-<h2>Tennis Club Reservation System</h2>
+<!--Basic display-->
+<!DOCTYPE html>
+<html>
 
+<body>
+	<header>
+		<h1>Welcome to [The Tennis Club]</h1>
+		<p>Brought to you by HCC Inc.</p>
+	</header>
 
-<!--Basic display of Test model objects-->
-<ul>
-    {% for message in messages %}
-      <li>{{ message.text }}</li>
-    {% endfor %}
-  </ul>
+	<main>
+		<section>
+			<h2>Recent Posts</h2>
+			<ul>
+				{% for message in messages %}
+				<li>{{ message.text }}</li>
+				{% endfor %}
+			</ul>
+		</section>
+	</main>
+
+	<footer>
+		<p>Copyright © 2023 HCC Inc.</p>
+	</footer>
+</body>
+
+</html>
 
 {% endblock content %}
