@@ -1,34 +1,119 @@
 {% extends "base.html" %} <!--Uses base.html to generate header with link-->
 {% block content %}
-<h1 style="padding-top: 25px;">Directory</h1>
-<h2>Placeholder</h2>
-<br>
+<!DOCTYPE html>
+<html>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Email Address</th>
-    </tr>
-  </thead>
-  <tbody>
-	{%for user in users%}
-    <tr>
-      <td>{{user.user_id}}</td>
-      <td>{{user.last_name}}</td>
-      <td>{{user.first_name}}</td>
-      <td>{{user.address}}</td>
-      <td>{{user.phone_number}}</td>
-      <td>{{user.email}}</td>
-    </tr>
-	{%endfor%}
-  </tbody>
-</table>
+<head>
+	<title>The Tennis Club</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
 
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 25px;
+			text-align: center;
+		}
 
-<br>
+		h1 {
+			margin: 0;
+			font-size: 40px;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+		}
+
+		p {
+			margin: 0;
+			font-size: 18px;
+			font-style: italic;
+		}
+
+		main {
+			padding: 25px;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		h2 {
+			font-size: 32px;
+			color: #333;
+			margin-bottom: 20px;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		li {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+
+		footer {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			position: fixed;
+  			left: 0;
+  			bottom: 0;
+  			width: 100%;
+		}
+
+		footer p {
+			margin: 0;
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+	<header style="padding-top: 100px;">
+		<h1>Member Directory</h1>
+	</header>
+	<main>
+		<section style="text-align: center";>
+			<br>
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for user in users%}
+                <tr>
+                <td>{{user.user_id}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.phone_number}}</td>
+                <td>{{user.email}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+            </table>
+            <br>
+		</section>
+	</main>
+
+	<footer>
+		<p>Copyright © 2023 HCC Inc.</p>
+	</footer>
+</body>
+
+</html>
+
 {% endblock content %}
