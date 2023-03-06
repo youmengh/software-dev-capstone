@@ -38,6 +38,13 @@ def directory_page(request):
     template_name = 'directory.html'
     return render(request, template_name)
 
+def login_page(request):
+    # template path
+    template_name = 'login.html'
+    return render(request, template_name)
+
+
+
 
 # class-based views (LEGACY DO NOT USE)
 

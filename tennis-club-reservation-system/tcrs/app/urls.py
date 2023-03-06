@@ -22,5 +22,6 @@ urlpatterns = [
     path("reservations/", views.reservation_page, name='reservations'),
     path("payment/", views.payment_page, name='payment'),
     path("directory/", views.directory_page, name='directory'),
+    path("login/", views.login_page, name='login'),
 ]
 
