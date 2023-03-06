@@ -2,7 +2,7 @@
 {% block content %}
 
 <!--Basic display-->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 <body>
@@ -11,6 +11,99 @@
 		<p>Brought to you by HCC Inc.</p>
 	</header>
 
+	<main>
+		<section>
+			<h2>News and Updates</h2>
+			<ul>
+				{% for message in messages %}
+				<li>{{ message.text }}</li>
+				{% endfor %}
+			</ul>
+		</section>
+	</main>
+
+	<footer>
+		<p>Copyright © 2023 HCC Inc.</p>
+	</footer>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>The Tennis Club</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
+
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 25px;
+			text-align: center;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 40px;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+		}
+
+		p {
+			margin: 0;
+			font-size: 18px;
+			font-style: italic;
+		}
+
+		main {
+			padding: 25px;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		h2 {
+			font-size: 32px;
+			color: #333;
+			margin-bottom: 20px;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		li {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+
+		footer {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+
+		footer p {
+			margin: 0;
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+	<header style="padding-top: 100px;">
+		<h1>Welcome to The Tennis Club</h1>
+		<p>Brought to you by HCC Inc.</p>
+	</header>
 	<main>
 		<section>
 			<h2>News and Updates</h2>
