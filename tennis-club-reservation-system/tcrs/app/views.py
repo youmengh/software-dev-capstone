@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import Test
-
+from .models import NewsFeed
+from .models import User
 # Create your views here.
 # Function-based views defined here
 
@@ -10,8 +10,8 @@ def home_page(request):
     # template path
     template_name = 'home.html'
 
-    # DISPLAYING TEST MODEL (NOT PERMANENT)
-    messages = Test.objects.all()
+    # DISPLAYING NEWS FEED
+    messages = NewsFeed.objects.all()
     context = {
         'messages': messages
     }
@@ -36,7 +36,14 @@ def payment_page(request):
 def directory_page(request):
     # template path
     template_name = 'directory.html'
-    return render(request, template_name)
+
+    # code to view accounts from the database
+    users = User.objects.all()
+    context = {
+        'users': users
+    }
+    # render the page
+    return render(request, template_name, context)
 
 def login_page(request):
     # template path
