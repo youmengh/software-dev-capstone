@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <title>[The Tennis Club]</title>
+  <style>
+  /* list containing all links */ 
+    .navbar_list {  
+      list-style-type: none;  
+      position: fixed;  
+      width:100%;  
+      top:0;  
+      margin: 0;  
+      padding: 0px;  
+      overflow: hidden;  
+      background-color: white;  
+    }  
 
-<head>
-  <title>[The Tennis Club]</title>
-</head>
+  /* defines borders of each element of navbar */    
+    .navbar {  
+      float: left;  
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;  
+    }  
+      
+  /* defines element format when it is the selected link */
+    .navbar a {  
+      display: block;  
+      color: black;  
+      font-size:20px;  
+      text-align: center;  
+      padding: 10px 20px;  
+      text-decoration: none;  
+    }  
+  /* defines element color when selected */  
+    .active{  
+    background-color: red;  
+    color: white;  
+    }
 
-<header>
-  <a href="{% url 'home' %}">| Home | </a>
-  <a href="{% url 'account' %}">Account | </a>
-  <a href="{% url 'reservations' %}">Reservations | </a>
-  <a href="{% url 'payment' %}">Payment | </a>
-</header>
-
+  /* defines navbar element when hovered over */    
+    .navbar a:hover {  
+      background-color: red;  
+      color: white;  
+    }  
+    </style>  
+    </head>  
+  
+  <body> 
+  
+  <!--navbar implementation for all docs using base.html to implement-->
+  <ul class="navbar_list">  
+    <li class="navbar"><a href="{% url 'home' %}">Home</a></li>
+    <li class="navbar"><a href="{% url 'account' %}">Account</a></li>
+    <li class="navbar"><a href="{% url 'reservations' %}">Reservations</a></li>
+    <li class="navbar"><a href="{% url 'payment' %}">Payment</a></li>
+  </ul>  
 </html>
 
 {% block content %} {% endblock content %}
