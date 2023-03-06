@@ -33,6 +33,11 @@ def payment_page(request):
     template_name = 'payment.html'
     return render(request, template_name)
 
+def directory_page(request):
+    # template path
+    template_name = 'directory.html'
+    return render(request, template_name)
+
 
 # class-based views (LEGACY DO NOT USE)
 

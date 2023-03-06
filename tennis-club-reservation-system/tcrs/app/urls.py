@@ -21,5 +21,6 @@ urlpatterns = [
     path("account/", views.account_page, name='account'),
     path("reservations/", views.reservation_page, name='reservations'),
     path("payment/", views.payment_page, name='payment'),
+    path("directory/", views.directory_page, name='directory'),
 ]
 
