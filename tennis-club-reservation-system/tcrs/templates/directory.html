@@ -2,4 +2,33 @@
 {% block content %}
 <h1 style="padding-top: 25px;">Directory</h1>
 <h2>Placeholder</h2>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email Address</th>
+    </tr>
+  </thead>
+  <tbody>
+	{%for user in users%}
+    <tr>
+      <td>{{user.user_id}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.address}}</td>
+      <td>{{user.phone_number}}</td>
+      <td>{{user.email}}</td>
+    </tr>
+	{%endfor%}
+  </tbody>
+</table>
+
+
+<br>
 {% endblock content %}
