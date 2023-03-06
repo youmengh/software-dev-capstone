@@ -1,34 +1,6 @@
 {% extends "base.html" %} <!--Uses base.html to generate header with link-->
 {% block content %}
 
-<!--Basic display-->
-<!-- <!DOCTYPE html>
-<html>
-
-<body>
-	<header>
-		<h1 style="padding-top: 25px;">Welcome to [The Tennis Club]</h1>
-		<p>Brought to you by HCC Inc.</p>
-	</header>
-
-	<main>
-		<section>
-			<h2>News and Updates</h2>
-			<ul>
-				{% for message in messages %}
-				<li>{{ message.text }}</li>
-				{% endfor %}
-			</ul>
-		</section>
-	</main>
-
-	<footer>
-		<p>Copyright © 2023 HCC Inc.</p>
-	</footer>
-</body>
-
-</html> -->
-
 <!DOCTYPE html>
 <html>
 
@@ -90,6 +62,10 @@
 			color: #fff;
 			padding: 10px;
 			text-align: center;
+			position: fixed;
+  			left: 0;
+  			bottom: 0;
+  			width: 100%;
 		}
 
 		footer p {
@@ -105,7 +81,7 @@
 		<p>Brought to you by HCC Inc.</p>
 	</header>
 	<main>
-		<section>
+		<section style="text-align: center";>
 			<h2>News and Updates</h2>
 			<ul>
 				{% for message in messages %}
