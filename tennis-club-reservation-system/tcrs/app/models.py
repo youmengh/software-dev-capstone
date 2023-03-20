@@ -3,7 +3,7 @@ from django.db import models
 class NewsFeed(models.Model):  # This model is for displaying updates and news on the home page
     text = models.TextField()
 
-class User(models.Model):
+class Account(models.Model):
     user_id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=100, default="lastname")
     first_name = models.CharField(max_length=100, default="firstname")

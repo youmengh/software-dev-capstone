@@ -93,14 +93,14 @@
                 </tr>
             </thead>
             <tbody>
-                {%for user in users%}
+                {%for account in accounts%}
                 <tr>
-                <td>{{user.user_id}}</td>
-                <td>{{user.last_name}}</td>
-                <td>{{user.first_name}}</td>
-                <td>{{user.address}}</td>
-                <td>{{user.phone_number}}</td>
-                <td>{{user.email}}</td>
+                <td>{{account.user_id}}</td>
+                <td>{{account.last_name}}</td>
+                <td>{{account.first_name}}</td>
+                <td>{{account.address}}</td>
+                <td>{{account.phone_number}}</td>
+                <td>{{account.email}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
