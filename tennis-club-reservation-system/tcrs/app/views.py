@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .models import NewsFeed
-from .models import User
+from .models import Account
 # Create your views here.
 # Function-based views defined here
 
@@ -38,9 +38,9 @@ def directory_page(request):
     template_name = 'directory.html'
 
     # code to view accounts from the database
-    users = User.objects.all()
+    accounts = Account.objects.all()
     context = {
-        'users': users
+        'accounts': accounts
     }
     # render the page
     return render(request, template_name, context)
@@ -67,3 +67,5 @@ def login_page(request):
 
 # class PaymentPageView(TemplateView):  # method call for payment page template
 #     template_name = "payment.html"
+
+ 
