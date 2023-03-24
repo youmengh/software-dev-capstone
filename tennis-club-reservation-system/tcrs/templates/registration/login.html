@@ -1,0 +1,7 @@
+<!--This is the template for the log in page-->
+<h2>Log In</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+</form>
