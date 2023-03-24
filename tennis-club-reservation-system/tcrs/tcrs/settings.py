@@ -68,6 +68,9 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "/" # Should redirect login to home page if successful
+LOGOUT_REDIRECT_URL = "/" 
+
 WSGI_APPLICATION = 'tcrs.wsgi.application'
 
 
