@@ -8,19 +8,33 @@
 	<title>The Tennis Club</title>
 </head>
 
+
 <body>
+	{% if user.is_authenticated %}
 	<header style="padding-top: 100px;">
 		<h1>Make a Payment</h1>
 	</header>
 	<main>
 		<section style="text-align: center" ;>
-			<h2>Placeholder</h2>
+			<h2>You are currently not a memeber. Please fill out card information below.</h2>
 		</section>
 	</main>
+	{% else %}
+	<header style="padding-top: 100px;">
+		<h1>Make a Payment</h1>
+	</header>
+	<main>
+		<section style="text-align: center" ;>
+			<h2>You must be signed in to an account to register for a memebership.</h2>
+		</section>
+	</main>
+	{% endif %}
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>
 	</footer>
 </body>
+
+
 
 </html>
 {% endblock content %}
