@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import NewsFeed
-from .models import Account
+from .models import NewsFeed, Account
+from .forms import UserSignupForm
+from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
-# Function-based views defined here
 
 def home_page(request):
     # template path
@@ -45,21 +46,21 @@ def directory_page(request):
     # render the page
     return render(request, template_name, context)
 
+def signup_page(request):
+    # template path
+    template_name = 'registration/signup.html'
+    if request.method == 'POST':
+            
+            form = UserSignupForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, f'Your account has been created! You are now able to log in.')
+                return redirect('login')
+    else:
+        form = UserSignupForm()
 
+    return render(request, template_name, {'form': form})
 
-# class-based views (LEGACY DO NOT USE)
-
-# class HomePageView(TemplateView):   # method call for home page template
-#     model = TestModel
-#     template_name = "home.html"
-
-# class AccountPageView(TemplateView):  # method call for account page template
-#     template_name = "accounts.html"
-
-# class ReservationPageView(TemplateView):  # method call for reservation page template
-#     template_name = "reservations.html"
-
-# class PaymentPageView(TemplateView):  # method call for payment page template
-#     template_name = "payment.html"
 
  

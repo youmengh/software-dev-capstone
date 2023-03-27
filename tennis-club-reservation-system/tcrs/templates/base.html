@@ -92,6 +92,7 @@
     <li class="navbar"><a href="{% url 'directory' %}">Directory</a></li>
   </ul>
 
+  <!--login display for if you're logged in or not-->
   {% block login %}
   {% if user.is_authenticated %}
   <p class="login_message">Hi {{user.username}}!</p>
