@@ -1,28 +1,30 @@
 <!--This is the template for the log in page-->
+
 <head>
   <style>
-    
     form {
-            background-color: white;
-            font-family: Arial;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
-            border: 3px solid black;
-            padding: 5px;
-        }
-
+      background-color: white;
+      font-family: Arial;
+      text-align: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+      border: 3px solid black;
+      padding: 5px;
+    }
+    div {
+      text-align: center;
+    }
   </style>
 </head>
 <main>
-<div>
-  <h2>Login to Your Account</h2>
+  <div>
+    <h2>Login to Your Account</h2>
     <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log In</button>
     </form>
-</div>  
+  </div>
 </main>
-
