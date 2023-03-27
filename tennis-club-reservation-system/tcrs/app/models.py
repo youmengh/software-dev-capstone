@@ -1,18 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class NewsFeed(models.Model):  # This model is for displaying updates and news on the home page
     text = models.TextField()
 
-class Account(models.Model):
-    user_id = models.AutoField(primary_key=True)
+
+class MemberProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # Delete profile when user is deleted, this is username/password/email
     last_name = models.CharField(max_length=100, default="lastname")
     first_name = models.CharField(max_length=100, default="firstname")
     address = models.CharField(max_length=100, default="address")
     phone_number = models.CharField(max_length=100, default="phone")
-    email = models.CharField(max_length=100, default="email")
-    date_of_birth = models.CharField(max_length=100, default="dob")
+    date_of_birth = models.DateField(max_length=100, default="dob")
 
-# returns name of entry in model lists instead of <model>_object
-def __str__(self):  # new
-        return self.text[:50]
-
+    def __str__(self):
+        return f'{self.user.username} Profile' #show how we want it to be displayed

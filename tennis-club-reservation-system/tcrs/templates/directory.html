@@ -20,23 +20,19 @@
             <table class="table">
             <thead>
                 <tr>
-                <th scope="col">#</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Email Address</th>
                 </tr>
             </thead>
             <tbody>
-                {%for account in accounts%}
+                {%for profile in profiles%}
                 <tr>
-                <td>{{account.user_id}}</td>
-                <td>{{account.last_name}}</td>
-                <td>{{account.first_name}}</td>
-                <td>{{account.address}}</td>
-                <td>{{account.phone_number}}</td>
-                <td>{{account.email}}</td>
+                <td>{{profile.last_name}}</td>
+                <td>{{profile.first_name}}</td>
+                <td>{{profile.address}}</td>
+                <td>{{profile.phone_number}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
