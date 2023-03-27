@@ -28,9 +28,9 @@ def reservation_page(request):
     template_name = 'reservations.html'
     return render(request, template_name)
 
-def payment_page(request):
+def membership_page(request):
     # template path
-    template_name = 'payment.html'
+    template_name = 'membership.html'
     return render(request, template_name)
 
 def directory_page(request):
