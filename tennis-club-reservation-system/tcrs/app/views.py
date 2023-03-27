@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import NewsFeed, Account
-from .forms import UserSignupForm
+from .models import NewsFeed, MemberProfile
+from .forms import UserSignupForm, MemberInformationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home_page(request):
@@ -32,16 +33,26 @@ def reservation_page(request):
 def membership_page(request):
     # template path
     template_name = 'membership.html'
-    return render(request, template_name)
+
+    if request.method == 'POST':
+            
+            form = MemberInformationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+    else:
+        form = MemberInformationForm()
+
+    return render(request, template_name, {'form': form})
 
 def directory_page(request):
     # template path
     template_name = 'directory.html'
 
     # code to view accounts from the database
-    accounts = Account.objects.all()
+    profiles = MemberProfile.objects.all()
     context = {
-        'accounts': accounts
+        'profiles': profiles
     }
     # render the page
     return render(request, template_name, context)
@@ -55,7 +66,7 @@ def signup_page(request):
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
-                messages.success(request, f'Your account has been created! You are now able to log in.')
+                messages.success(request, f'Your account has been created!')
                 return redirect('login')
     else:
         form = UserSignupForm()

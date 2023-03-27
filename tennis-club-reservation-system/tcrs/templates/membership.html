@@ -6,26 +6,46 @@
 <head>
 	<link rel="stylesheet" href="../static/css/style.css">
 	<title>The Tennis Club</title>
+	<style>
+		form {
+		  background-color: white;
+		  font-family: Arial;
+		  text-align: center;
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  width: 40%;
+		  border: 3px solid black;
+		  padding: 5px;
+		}
+		div {
+		  text-align: center;
+		  padding-top: 10
+		}
+	  </style>
 </head>
 
 
 <body>
 	{% if user.is_authenticated %}
-	<header style="padding-top: 100px;">
-		<h1>Make a Payment</h1>
-	</header>
 	<main>
-		<section style="text-align: center" ;>
-			<h2>You are currently not a memeber. Please fill out card information below.</h2>
-		</section>
+		<div>
+			<h2>Create your Profile</h2>
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit">Submit info</button>
+			</form>
+		</div>
 	</main>
+
 	{% else %}
 	<header style="padding-top: 100px;">
 		<h1>Make a Payment</h1>
 	</header>
 	<main>
 		<section style="text-align: center" ;>
-			<h2>You must be signed in to an account to register for a memebership.</h2>
+			<h2>You must be signed in to an account to register for a membership or make a payment.</h2>
 		</section>
 	</main>
 	{% endif %}

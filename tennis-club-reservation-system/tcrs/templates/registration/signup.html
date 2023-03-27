@@ -1,29 +1,33 @@
 {% block content %}
+
 <head>
-    <style>
-        
-        div {
-            background-color: white;
-            font-family: Arial;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
-            border: 3px solid black;
-            padding: 5px;
-        }
-        
-    </style>
+  <style>
+    form {
+      background-color: white;
+      font-family: Arial;
+      text-align: left;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+      border: 3px solid black;
+      padding: 5px;
+    }
+    div {
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-<div>
-  <h2 class>Create an Account</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
+  <div>
+    <h2 class>Create an Account</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Sign Up</button>
+    </form>
     Already have an account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-</div>
+  </div>
 </body>
 {% endblock %}
