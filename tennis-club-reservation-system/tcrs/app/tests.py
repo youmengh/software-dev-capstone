@@ -17,7 +17,7 @@ class ReservationpageTests(SimpleTestCase):
         response = self.client.get("/reservations/")
         self.assertEqual(response.status_code, 200)
 
-class PaymentpageTests(SimpleTestCase):
+class MembershippageTests(SimpleTestCase):
     def test_url_exists_at_correct_location(self):
-        response = self.client.get("/payment/")
+        response = self.client.get("/membership/")
         self.assertEqual(response.status_code, 200)

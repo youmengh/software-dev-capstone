@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    {% if user.is_authenticated %}
 	<header style="padding-top: 100px;">
 		<h1>Member Directory</h1>
 	</header>
@@ -43,7 +44,16 @@
             <br>
 		</section>
 	</main>
-
+    {% else %}
+    <header style="padding-top: 100px;">
+		<h1>Member Directory</h1>
+	</header>
+    <main>
+		<section style="text-align: center" ;>
+			<h2>You must be signed in to view the directory.</h2>
+		</section>
+	</main>
+    {% endif %}
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>
 	</footer>
