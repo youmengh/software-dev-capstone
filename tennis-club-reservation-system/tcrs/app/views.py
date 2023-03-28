@@ -38,7 +38,9 @@ def membership_page(request):
             
             form = MemberInformationForm(request.POST)
             if form.is_valid():
-                form.save()
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
                 return redirect('home')
     else:
         form = MemberInformationForm()
