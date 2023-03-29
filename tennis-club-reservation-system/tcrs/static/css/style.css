@@ -30,6 +30,8 @@ main {
     padding: 25px;
     max-width: 800px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 h2 {
@@ -64,3 +66,42 @@ footer p {
     margin: 0;
     font-size: 16px;
 }
+
+/*start of css for reservations*/
+section {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin: 10px;
+    flex: 1;
+    min-width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+button {
+	margin-left: 10px;
+	padding: 15px;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="submit"] {
+    /*margin-right: 125px;*/
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    flex: 2;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
