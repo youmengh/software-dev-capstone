@@ -11,7 +11,7 @@
 
 <body>
     <!--If user is logged in-->
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and is_member %}
 	<header style="padding-top: 100px;">
 		<h1>Member Directory</h1>
 	</header>
@@ -43,14 +43,23 @@
     </div>
 	</main>
 
-    <!--Page if user not logged in-->
+    <!--Page if user logged in but not member-->
+    {% elif user.is_authenticated and not is_member %}
+    <header style="padding-top: 100px;">
+		<h1>Member Directory</h1>
+	</header>
+    <main>
+		<section style="text-align: center" ;>
+			<h2>You must be a member of the club to view the directory.</h2>
+		</section>
+	</main>
     {% else %}
     <header style="padding-top: 100px;">
 		<h1>Member Directory</h1>
 	</header>
     <main>
 		<section style="text-align: center" ;>
-			<h2>You must be signed in to view the directory.</h2>
+			<h2>You must sign in to view the directory.</h2>
 		</section>
 	</main>
     {% endif %}
