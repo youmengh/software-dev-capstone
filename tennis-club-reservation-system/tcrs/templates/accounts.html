@@ -9,14 +9,34 @@
 </head>
 
 <body>
+	{% if user.is_authenticated %}
+	<header style="padding-top: 100px;">
+		<h1>{{user.username}}'s Account Details</h1>
+	</header>
+	<main>
+		<section style="text-align: center" ;>
+			<div class="accountbox">
+				<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
+				<h4>Phone Number:</h4>
+				<p>{{ user.memberprofile.phone_number }}</p>
+				<h4>Home Address:</h4>
+				<p>{{ user.memberprofile.address }}</p>
+				<h4>Date of Birth:</h4>
+				<p>{{ user.memberprofile.date_of_birth }}</p>
+			</div>
+		</section>
+	</main>
+
+	{%else%}
 	<header style="padding-top: 100px;">
 		<h1>Account Information</h1>
 	</header>
 	<main>
 		<section style="text-align: center" ;>
-			<h2>Placeholder</h2>
+			<h2>Please sign in to view your profile.</h2>
 		</section>
 	</main>
+	{%endif%}
 
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>

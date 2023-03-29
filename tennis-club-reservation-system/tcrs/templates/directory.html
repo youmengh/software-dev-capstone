@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--If user is logged in-->
     {% if user.is_authenticated %}
 	<header style="padding-top: 100px;">
 		<h1>Member Directory</h1>
@@ -40,6 +41,8 @@
             <br>
 		</section>
 	</main>
+
+    <!--Page if user not logged in-->
     {% else %}
     <header style="padding-top: 100px;">
 		<h1>Member Directory</h1>

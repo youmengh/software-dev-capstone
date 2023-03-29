@@ -23,6 +23,15 @@ def home_page(request):
 def account_page(request):
     # template path
     template_name = 'accounts.html'
+
+    # code to view accounts from the database
+    profile = MemberProfile.objects.all()
+    context = {
+        'profile': profile
+    }
+    # render the page
+    return render(request, template_name, context)
+
     return render(request, template_name)
 
 def reservation_page(request):
