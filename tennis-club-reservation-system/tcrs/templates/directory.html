@@ -16,22 +16,22 @@
 		<h1>Member Directory</h1>
 	</header>
 	<main>
-		<section style="text-align: center";>
+        <div class="accountbox">
+		<section>
 			<br>
             <table class="table">
             <thead>
                 <tr>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Phone Number</th>
+                <th scope="col">Email Address</th>
                 </tr>
             </thead>
             <tbody>
                 {%for profile in profiles%}
                 <tr>
-                <td>{{profile.last_name}}</td>
-                <td>{{profile.first_name}}</td>
+                <td>{{profile.first_name}} {{profile.last_name}}</td>
                 <td>{{profile.address}}</td>
                 <td>{{profile.phone_number}}</td>
                 </tr>
@@ -40,6 +40,7 @@
             </table>
             <br>
 		</section>
+    </div>
 	</main>
 
     <!--Page if user not logged in-->

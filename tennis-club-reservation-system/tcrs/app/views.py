@@ -20,19 +20,29 @@ def home_page(request):
 
     return render(request, template_name, context)
 
+@login_required(login_url='signup')
 def account_page(request):
     # template path
     template_name = 'accounts.html'
 
-    # code to view accounts from the database
+    # checks if member profile data exists, second level authentication for members only
+    
+    is_member = True
+
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False; 
+    
+    # code to view profile info from the database
     profile = MemberProfile.objects.all()
     context = {
-        'profile': profile
+        'profile': profile,
+        'is_member': is_member,
     }
     # render the page
     return render(request, template_name, context)
 
-    return render(request, template_name)
 
 def reservation_page(request):
     # template path

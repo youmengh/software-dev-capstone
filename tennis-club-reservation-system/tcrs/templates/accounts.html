@@ -9,13 +9,14 @@
 </head>
 
 <body>
-	{% if user.is_authenticated %}
+	{% if user.is_authenticated and is_member %}
 	<header style="padding-top: 100px;">
 		<h1>{{user.username}}'s Account Details</h1>
 	</header>
 	<main>
-		<section style="text-align: center" ;>
+		<section style="text-align: center";>
 			<div class="accountbox">
+				<h4>Full Name:</h4>
 				<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
 				<h4>Phone Number:</h4>
 				<p>{{ user.memberprofile.phone_number }}</p>
@@ -26,14 +27,22 @@
 			</div>
 		</section>
 	</main>
-
+	{% elif user.is_authenticated and not is_member %}
+	<header style="padding-top: 100px;">
+		<h1>Account Information</h1>
+	</header>
+	<main>
+		<section style="text-align: center" ;>
+			<h2>Please join our club to view your member profile.</h2>
+		</section>
+	</main>
 	{%else%}
 	<header style="padding-top: 100px;">
 		<h1>Account Information</h1>
 	</header>
 	<main>
 		<section style="text-align: center" ;>
-			<h2>Please sign in to view your profile.</h2>
+			<h2>Please sign in or create an account to view your member profile.</h2>
 		</section>
 	</main>
 	{%endif%}
