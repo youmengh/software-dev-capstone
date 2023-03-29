@@ -12,7 +12,7 @@
 	<header>
 		<h1>Tennis Reservation</h1>
 	</header>
-
+	{% if user.is_authenticated and is_member %}
 	<main>
 		<section id="available-courts">
 			<h2>Available courts</h2>
@@ -48,6 +48,15 @@
 			alert("Your reservation has been booked for " + date + " at " + time + " for 90 minutes.");
 		}
 	</script>
+
+	{% elif user.is_authenticated and not is_member %}
+	<main>
+		<section style="text-align: center" ;>
+			<h2>You must be a member of the club to make a court reservation.</h2>
+		</section>
+	</main>
+	{%endif%}
+
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>
 	</footer>

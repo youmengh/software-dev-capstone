@@ -105,3 +105,11 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+/* For textboxes */
+
+.accountbox {
+    border: 3px solid black;
+    font-family: Arial;
+    text-align: center;
+}
+

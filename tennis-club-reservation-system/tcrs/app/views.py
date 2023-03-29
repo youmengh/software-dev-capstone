@@ -20,16 +20,45 @@ def home_page(request):
 
     return render(request, template_name, context)
 
+@login_required(login_url='signup')
 def account_page(request):
     # template path
     template_name = 'accounts.html'
-    return render(request, template_name)
 
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    
+    # code to view profile info from the database
+    profile = MemberProfile.objects.all()
+    context = {
+        'profile': profile,
+        'is_member': is_member,
+    }
+    # render the page
+    return render(request, template_name, context)
+
+@login_required(login_url='signup')
 def reservation_page(request):
     # template path
     template_name = 'reservations.html'
-    return render(request, template_name)
 
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
+
+    return render(request, template_name, context)
+
+@login_required(login_url='signup')
 def membership_page(request):
     # template path
     template_name = 'membership.html'
@@ -38,21 +67,32 @@ def membership_page(request):
             
             form = MemberInformationForm(request.POST)
             if form.is_valid():
-                form.save()
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
                 return redirect('home')
     else:
         form = MemberInformationForm()
 
     return render(request, template_name, {'form': form})
 
+@login_required(login_url='signup')
 def directory_page(request):
     # template path
     template_name = 'directory.html'
 
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+
     # code to view accounts from the database
     profiles = MemberProfile.objects.all()
     context = {
-        'profiles': profiles
+        'profiles': profiles,
+        'is_member': is_member,
     }
     # render the page
     return render(request, template_name, context)

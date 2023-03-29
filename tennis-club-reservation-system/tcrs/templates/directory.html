@@ -10,27 +10,28 @@
 </head>
 
 <body>
-    {% if user.is_authenticated %}
+    <!--If user is logged in-->
+    {% if user.is_authenticated and is_member %}
 	<header style="padding-top: 100px;">
 		<h1>Member Directory</h1>
 	</header>
 	<main>
-		<section style="text-align: center";>
+        <div class="accountbox">
+		<section>
 			<br>
             <table class="table">
             <thead>
                 <tr>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Phone Number</th>
+                <th scope="col">Email Address</th>
                 </tr>
             </thead>
             <tbody>
                 {%for profile in profiles%}
                 <tr>
-                <td>{{profile.last_name}}</td>
-                <td>{{profile.first_name}}</td>
+                <td>{{profile.first_name}} {{profile.last_name}}</td>
                 <td>{{profile.address}}</td>
                 <td>{{profile.phone_number}}</td>
                 </tr>
@@ -39,6 +40,18 @@
             </table>
             <br>
 		</section>
+    </div>
+	</main>
+
+    <!--Page if user logged in but not member-->
+    {% elif user.is_authenticated and not is_member %}
+    <header style="padding-top: 100px;">
+		<h1>Member Directory</h1>
+	</header>
+    <main>
+		<section style="text-align: center" ;>
+			<h2>You must be a member of the club to view the directory.</h2>
+		</section>
 	</main>
     {% else %}
     <header style="padding-top: 100px;">
@@ -46,7 +59,7 @@
 	</header>
     <main>
 		<section style="text-align: center" ;>
-			<h2>You must be signed in to view the directory.</h2>
+			<h2>You must sign in to view the directory.</h2>
 		</section>
 	</main>
     {% endif %}
