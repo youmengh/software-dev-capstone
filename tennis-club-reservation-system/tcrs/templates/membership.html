@@ -6,30 +6,15 @@
 <head>
 	<link rel="stylesheet" href="../static/css/style.css">
 	<title>The Tennis Club</title>
-	<style>
-		form {
-		  background-color: white;
-		  font-family: Arial;
-		  text-align: center;
-		  display: block;
-		  margin-left: auto;
-		  margin-right: auto;
-		  width: 40%;
-		  border: 3px solid black;
-		  padding: 5px;
-		}
-		div {
-		  text-align: center;
-		  padding-top: 10
-		}
-	  </style>
 </head>
 
-
 <body>
-	{% if user.is_authenticated %}
+	{% if user.is_authenticated and not is_member %}
+	<header style="padding-top: 100px;">
+		<h1>Apply for Club Membership</h1>
+	</header>
 	<main>
-		<div>
+		<div class="memberform">
 			<h2>Create your Profile</h2>
 			<form method="post">
 				{% csrf_token %}
@@ -39,9 +24,19 @@
 		</div>
 	</main>
 
+	{% elif user.is_authenticated and is_member %}
+	<header style="padding-top: 100px;">
+		<h1>Your Membership</h1>
+	</header>
+	<main>
+		<div class="accountbox">
+			<h4>You have been a member since {{ user.date_joined }}!</h4>
+		</div>
+	</main>
+
 	{% else %}
 	<header style="padding-top: 100px;">
-		<h1>Make a Payment</h1>
+		<h1>Apply for Club Membership</h1>
 	</header>
 	<main>
 		<section style="text-align: center" ;>
@@ -49,6 +44,7 @@
 		</section>
 	</main>
 	{% endif %}
+
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>
 	</footer>

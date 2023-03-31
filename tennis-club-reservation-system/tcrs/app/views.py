@@ -63,6 +63,16 @@ def membership_page(request):
     # template path
     template_name = 'membership.html'
 
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
+
     if request.method == 'POST':
             
             form = MemberInformationForm(request.POST)
@@ -70,11 +80,21 @@ def membership_page(request):
                 profile = form.save(commit=False)
                 profile.user = request.user
                 profile.save()
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                }
                 return redirect('home')
+                
     else:
         form = MemberInformationForm()
+        context = {
+            'form': form,
+            'is_member': is_member,
+        }
 
-    return render(request, template_name, {'form': form})
+
+    return render(request, template_name, context)
 
 @login_required(login_url='signup')
 def directory_page(request):
@@ -87,6 +107,8 @@ def directory_page(request):
         profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
+
+    email = User.email
 
     # code to view accounts from the database
     profiles = MemberProfile.objects.all()

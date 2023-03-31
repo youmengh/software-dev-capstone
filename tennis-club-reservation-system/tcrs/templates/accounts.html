@@ -14,18 +14,18 @@
 		<h1>{{user.username}}'s Account Details</h1>
 	</header>
 	<main>
-		<section style="text-align: center";>
-			<div class="accountbox">
-				<h4>Full Name:</h4>
-				<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
-				<h4>Phone Number:</h4>
-				<p>{{ user.memberprofile.phone_number }}</p>
-				<h4>Home Address:</h4>
-				<p>{{ user.memberprofile.address }}</p>
-				<h4>Date of Birth:</h4>
-				<p>{{ user.memberprofile.date_of_birth }}</p>
-			</div>
-		</section>
+		<div class="accountbox">
+			<h4>Full Name:</h4>
+			<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
+			<h4>Phone Number:</h4>
+			<p>{{ user.memberprofile.phone_number }}</p>
+			<h4>Home Address:</h4>
+			<p>{{ user.memberprofile.address }}</p>
+			<h4>Date of Birth:</h4>
+			<p>{{ user.memberprofile.date_of_birth }}</p>
+			<h4>Account Created:</h4>
+			<p>{{ user.date_joined }}</p>
+		</div>
 	</main>
 	{% elif user.is_authenticated and not is_member %}
 	<header style="padding-top: 100px;">
