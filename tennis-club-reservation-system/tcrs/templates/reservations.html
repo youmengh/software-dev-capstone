@@ -14,9 +14,12 @@
 	</header>
 	{% if user.is_authenticated and is_member %}
 	<main>
-		<section id="available-courts">
-			<h2>Available courts</h2>
-			<ul id="court-list"></ul>
+		<section id="calendar">
+			<h2>Calendar</h2>
+			<div class="calendar">
+				{{ calendar|safe }}
+			</div>
+			<ul id="court-list"></ul> 
 		</section>
 
 		<section id="booking">
