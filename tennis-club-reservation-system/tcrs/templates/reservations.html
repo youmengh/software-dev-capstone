@@ -14,44 +14,21 @@
 	</header>
 	{% if user.is_authenticated and is_member %}
 	<main>
-		<section id="calendar">
-			<h2>Calendar</h2>
-			<div class="calendar">
-				{{ calendar|safe }}
-			</div>
-			<ul id="court-list"></ul> 
-		</section>
-
-		<section id="booking">
-			<h2>Book a court (90 minutes)</h2>
-
-			<form>
-				<label for="date">Date:</label>
-				<input type="date" id="date" name="date">
-
-				<label for="time">Time:</label>
-				<input type="time" id="time" name="time">
-				<button type="submit" onclick="bookCourt()">Book</button>
-			</form>			
-		</section>
-		
+		<div class="memberform">
+			<h2>Reserve a Court</h2>
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit">Reserve</button>
+			</form>
+		</div>
 	</main>
 
 	<footer>
 		<p>&copy; 2023 Tennis Reservation. All rights reserved.</p>
 	</footer>
 
-	<script type="text/javascript">
-		function bookCourt() {
-			var date = document.getElementById("date").value;
-			var time = document.getElementById("time").value;
-
-			// TODO: Check if the selected court is available and add it to the list of reservations
-
-			alert("Your reservation has been booked for " + date + " at " + time + " for 90 minutes.");
-		}
-	</script>
-
+	
 	{% elif user.is_authenticated and not is_member %}
 	<main>
 		<section style="text-align: center" ;>

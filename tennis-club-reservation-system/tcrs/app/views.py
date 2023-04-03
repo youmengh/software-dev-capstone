@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from .models import NewsFeed, MemberProfile, Object
 from .forms import UserSignupForm, MemberInformationForm
 from .models import NewsFeed, MemberProfile
-from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm
+from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -12,28 +12,28 @@ from calendar import HTMLCalendar
 from datetime import datetime
 # Create your views here.
 
-class Calendar(HTMLCalendar):
-    def __init__(self, objects):
-        super().__init__()
-        self.objects = objects
+# class Calendar(HTMLCalendar):
+#     def __init__(self, objects):
+#         super().__init__()
+#         self.objects = objects
 
-    def formatday(self, day, weekday): 
-        if day == 0:
-            return '<td class="noday">&nbsp;</td>' #day outside the appropriate month
-        else:
-            cssclass = self.cssclasses[weekday]
-            if datetime.now().day == day and datetime.now().month == self.month:
-                cssclass += ' today'
-            objects_html = ''
-            for obj in self.objects:
-                if obj.date.day == day and obj.date.month == self.month:
-                    objects_html += f'<li>{obj.title}</li>'
-            return f'<td class="{cssclass}"><span class="day-number">{day}</span><ul>{objects_html}</ul></td>'
+#     def formatday(self, day, weekday): 
+#         if day == 0:
+#             return '<td class="noday">&nbsp;</td>' #day outside the appropriate month
+#         else:
+#             cssclass = self.cssclasses[weekday]
+#             if datetime.now().day == day and datetime.now().month == self.month:
+#                 cssclass += ' today'
+#             objects_html = ''
+#             for obj in self.objects:
+#                 if obj.date.day == day and obj.date.month == self.month:
+#                     objects_html += f'<li>{obj.title}</li>'
+#             return f'<td class="{cssclass}"><span class="day-number">{day}</span><ul>{objects_html}</ul></td>'
 
-def calendar_view(request, year, month):
-    objects = Object.objects.filter(date__year=year, date__month=month)
-    cal = Calendar(objects).formatmonth(int(year), int(month))
-    return render(request, 'reservations.html', {'calendar': cal})
+# def calendar_view(request, year, month):
+#     objects = Object.objects.filter(date__year=year, date__month=month)
+#     cal = Calendar(objects).formatmonth(int(year), int(month))
+#     return render(request, 'reservations.html', {'calendar': cal})
 
 def home_page(request):
     # template path
@@ -82,6 +82,26 @@ def reservation_page(request):
     context = {
         'is_member': is_member,
     }
+
+    if request.method == 'POST':
+            
+            form = ReservationForm(request.POST)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                }
+                return redirect('home')
+                
+    else:
+        form = ReservationForm()
+        context = {
+            'form': form,
+            'is_member': is_member,
+        }
 
     return render(request, template_name, context)
 
