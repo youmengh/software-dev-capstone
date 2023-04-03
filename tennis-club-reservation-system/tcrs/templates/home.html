@@ -16,12 +16,14 @@
 	<main>
 
 		<section style="text-align: center" ;>
+		<div class="accountbox">
 			<h2>News and Updates</h2>
 			<ul>
 				{% for message in messages %}
 				<li>{{ message.text }}</li>
 				{% endfor %}
 			</ul>
+		</div>	
 		</section>
 	</main>
 

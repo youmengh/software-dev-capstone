@@ -2,25 +2,20 @@
 
 <head>
   <style>
-    form {
-      background-color: white;
+    .accountbox {
+      border: 3px solid black;
       font-family: Arial;
-      text-align: left;
-      display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 40%;
-      border: 3px solid black;
+      width: 50%;
+      text-align: left;
       padding: 5px;
-    }
-    div {
-      text-align: center;
     }
   </style>
 </head>
 
 <body>
-  <div>
+  <div class="accountbox">
     <h2 class>Create an Account</h2>
     <form method="post">
       {% csrf_token %}

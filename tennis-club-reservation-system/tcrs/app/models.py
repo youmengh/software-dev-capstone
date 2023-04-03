@@ -15,3 +15,17 @@ class MemberProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile' #show how we want it to be displayed
+
+class Object(models.Model):
+    title = models.CharField(max_length=200)
+    date = models.DateTimeField()
+    
+    def __str__(self):
+        return self.title
+    
+class PaymentInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    card_number = models.CharField(max_length=16)
+    cvv = models.CharField(max_length=3)
+    expiration_date = models.CharField(max_length=5)
+    payment_saved = models.BooleanField()

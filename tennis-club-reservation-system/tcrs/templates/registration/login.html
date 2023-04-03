@@ -1,25 +1,23 @@
 <!--This is the template for the log in page-->
+{% load static %}
+<!DOCTYPE html>
+<html>
 
 <head>
   <style>
-    form {
-      background-color: white;
+    .accountbox {
+      border: 3px solid black;
       font-family: Arial;
-      text-align: center;
-      display: block;
       margin-left: auto;
       margin-right: auto;
       width: 40%;
-      border: 3px solid black;
-      padding: 5px;
-    }
-    div {
       text-align: center;
+      padding: 5px;
     }
   </style>
 </head>
 <main>
-  <div>
+  <div class="accountbox">
     <h2>Login to Your Account</h2>
     <form method="post">
       {% csrf_token %}

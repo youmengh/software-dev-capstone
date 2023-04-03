@@ -21,8 +21,10 @@
   {% else %}
     <li class="navbar"><a href="{% url 'login' %}">Log In</a></li>
     <li class="navbar"><a href="{% url 'signup' %}">Sign Up</a></li>
+  {% endif %}
+  {% if user.is_superuser %}  
+    <li class="navbar"><a href="{% url 'admin:index' %}">Admin Settings</a></li>
   {% endif %}  
-
   </ul>
 
   <!--login display for if you're logged in or not-->
