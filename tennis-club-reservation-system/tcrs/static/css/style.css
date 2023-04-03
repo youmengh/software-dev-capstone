@@ -1,3 +1,55 @@
+/* list containing all links */
+.navbar_list {
+    list-style-type: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  /* defines borders of each element of navbar */
+  .navbar {
+    font-family: Arial, sans-serif;
+    float: left;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+
+  /* defines element format when it is the selected link */
+  .navbar a {
+    display: block;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+
+  /* defines element color when selected */
+  .active {
+    background-color: #810000;
+    color: white;
+  }
+
+  /* defines navbar element when hovered over */
+  .navbar a:hover {
+    background-color: #810000;
+    color: white;
+  }
+  /* Message to display logged in user's name */
+  .login_message {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    text-align: center;
+    color: #810000;
+  }
+
 body {
     margin: 0;
     padding: 0;
@@ -67,49 +119,27 @@ footer p {
     font-size: 16px;
 }
 
-/*start of css for reservations*/
-section {
-    background-color: #f2f2f2;
-    padding: 10px;
-    margin: 10px;
-    flex: 1;
-    min-width: 300px;
-}
-
-form {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-}
-
-button {
-	margin-left: 10px;
-	padding: 15px;
-}
-
-input[type="date"],
-input[type="time"],
-input[type="number"],
-input[type="submit"] {
-    /*margin-right: 125px;*/
-    margin-bottom: 10px;
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
-    flex: 2;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-
 /* For textboxes */
 
 .accountbox {
     border: 3px solid black;
     font-family: Arial;
+    margin: 0 auto;
     text-align: center;
+    padding: 5px;
 }
+
+.memberform {
+    background-color: white;
+    font-family: Arial;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    border: 3px solid black;
+    padding: 5px;
+    text-align: center;
+    padding-top: 10;
+  }
 

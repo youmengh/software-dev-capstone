@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .models import NewsFeed, MemberProfile, Object
 from .forms import UserSignupForm, MemberInformationForm
+from .models import NewsFeed, MemberProfile
+from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -10,28 +12,28 @@ from calendar import HTMLCalendar
 from datetime import datetime
 # Create your views here.
 
-class Calendar(HTMLCalendar):
-    def __init__(self, objects):
-        super().__init__()
-        self.objects = objects
+# class Calendar(HTMLCalendar):
+#     def __init__(self, objects):
+#         super().__init__()
+#         self.objects = objects
 
-    def formatday(self, day, weekday): 
-        if day == 0:
-            return '<td class="noday">&nbsp;</td>' #day outside the appropriate month
-        else:
-            cssclass = self.cssclasses[weekday]
-            if datetime.now().day == day and datetime.now().month == self.month:
-                cssclass += ' today'
-            objects_html = ''
-            for obj in self.objects:
-                if obj.date.day == day and obj.date.month == self.month:
-                    objects_html += f'<li>{obj.title}</li>'
-            return f'<td class="{cssclass}"><span class="day-number">{day}</span><ul>{objects_html}</ul></td>'
+#     def formatday(self, day, weekday): 
+#         if day == 0:
+#             return '<td class="noday">&nbsp;</td>' #day outside the appropriate month
+#         else:
+#             cssclass = self.cssclasses[weekday]
+#             if datetime.now().day == day and datetime.now().month == self.month:
+#                 cssclass += ' today'
+#             objects_html = ''
+#             for obj in self.objects:
+#                 if obj.date.day == day and obj.date.month == self.month:
+#                     objects_html += f'<li>{obj.title}</li>'
+#             return f'<td class="{cssclass}"><span class="day-number">{day}</span><ul>{objects_html}</ul></td>'
 
-def calendar_view(request, year, month):
-    objects = Object.objects.filter(date__year=year, date__month=month)
-    cal = ObjectCalendar(objects).formatmonth(int(year), int(month))
-    return render(request, 'reservations.html', {'calendar': cal})
+# def calendar_view(request, year, month):
+#     objects = Object.objects.filter(date__year=year, date__month=month)
+#     cal = Calendar(objects).formatmonth(int(year), int(month))
+#     return render(request, 'reservations.html', {'calendar': cal})
 
 def home_page(request):
     # template path
@@ -81,12 +83,42 @@ def reservation_page(request):
         'is_member': is_member,
     }
 
+    if request.method == 'POST':
+            
+            form = ReservationForm(request.POST)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                }
+                return redirect('home')
+                
+    else:
+        form = ReservationForm()
+        context = {
+            'form': form,
+            'is_member': is_member,
+        }
+
     return render(request, template_name, context)
 
 @login_required(login_url='signup')
 def membership_page(request):
     # template path
     template_name = 'membership.html'
+
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
 
     if request.method == 'POST':
             
@@ -95,11 +127,21 @@ def membership_page(request):
                 profile = form.save(commit=False)
                 profile.user = request.user
                 profile.save()
-                return redirect('home')
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                }
+                return redirect('payment')
+                
     else:
         form = MemberInformationForm()
+        context = {
+            'form': form,
+            'is_member': is_member,
+        }
 
-    return render(request, template_name, {'form': form})
+
+    return render(request, template_name, context)
 
 @login_required(login_url='signup')
 def directory_page(request):
@@ -112,6 +154,8 @@ def directory_page(request):
         profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
+
+    email = User.email
 
     # code to view accounts from the database
     profiles = MemberProfile.objects.all()
@@ -137,3 +181,44 @@ def signup_page(request):
         form = UserSignupForm()
 
     return render(request, template_name, {'form': form})
+
+@login_required(login_url='signup')
+def payment_page(request):
+    # template path
+    template_name = 'payment.html'
+
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
+
+    if request.method == 'POST':
+            
+            form = PaymentInformationForm(request.POST)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                }
+                return redirect('home')
+                
+    else:
+        form = PaymentInformationForm()
+        context = {
+            'form': form,
+            'is_member': is_member,
+        }
+
+
+    return render(request, template_name, context)
+
+
+ 

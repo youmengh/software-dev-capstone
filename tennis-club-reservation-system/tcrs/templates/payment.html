@@ -9,30 +9,30 @@
 </head>
 
 <body>
-	{% if user.is_authenticated and not is_member %}
+	{% if user.is_authenticated and is_member %}
 	<header style="padding-top: 100px;">
-		<h1>Apply for Club Membership</h1>
+		<h1>Club Membership Fee</h1>
 	</header>
 	<main>
 		<div class="memberform">
-			<h2>Create your Profile</h2>
+			<h2>Make a Payment</h2>
+            <h4>Your total bill is $1,000.00</h4>
 			<form method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
+                <button>I'm Paying By Check</button>
 				<button type="submit">Submit info</button>
 			</form>
 		</div>
 	</main>
 
-	{% elif user.is_authenticated and is_member %}
+	{% elif user.is_authenticated and not is_member %}
 	<header style="padding-top: 100px;">
-		<h1>Membership and Payment</h1>
+		<h1>Your Membership</h1>
 	</header>
 	<main>
 		<div class="accountbox">
-			<h2>Your Membership Information</h2>
 			<h4>You have been a member since {{ user.date_joined }}!</h4>
-			<a class="btn btn-primary" href="/payment">Make a Payment</a>
 		</div>
 	</main>
 
@@ -41,8 +41,8 @@
 		<h1>Apply for Club Membership</h1>
 	</header>
 	<main>
-		<section style="text-align: center" ;>
-			<h2>You must be signed in to an account to register for a membership or make a payment.</h2>
+		<section style="text-align: center";>
+			<h2>You must be signed in to an account to make a payment.</h2>
 		</section>
 	</main>
 	{% endif %}
