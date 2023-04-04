@@ -40,7 +40,7 @@ def account_page(request):
     # checks if user has a reservation to display, if no reservation view does not display My Reservations box
     user_reservation = True
     try:
-        user_reservation = Reservation.objects.get(date = request.user.reservation.date)
+        user_reservation = Reservation.objects.filter(court = request.user.reservation.court)
     except Reservation.DoesNotExist:
         user_reservation = False
     
@@ -85,7 +85,7 @@ def reservation_page(request):
                     'form': form,
                     'is_member': is_member,
                 }
-                return redirect('home')
+                return redirect('reservations')
                 
     else:
         form = ReservationForm()
