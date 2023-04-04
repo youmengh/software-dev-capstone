@@ -12,28 +12,6 @@ from calendar import HTMLCalendar
 from datetime import datetime
 # Create your views here.
 
-# class Calendar(HTMLCalendar):
-#     def __init__(self, objects):
-#         super().__init__()
-#         self.objects = objects
-
-#     def formatday(self, day, weekday): 
-#         if day == 0:
-#             return '<td class="noday">&nbsp;</td>' #day outside the appropriate month
-#         else:
-#             cssclass = self.cssclasses[weekday]
-#             if datetime.now().day == day and datetime.now().month == self.month:
-#                 cssclass += ' today'
-#             objects_html = ''
-#             for obj in self.objects:
-#                 if obj.date.day == day and obj.date.month == self.month:
-#                     objects_html += f'<li>{obj.title}</li>'
-#             return f'<td class="{cssclass}"><span class="day-number">{day}</span><ul>{objects_html}</ul></td>'
-
-# def calendar_view(request, year, month):
-#     objects = Object.objects.filter(date__year=year, date__month=month)
-#     cal = Calendar(objects).formatmonth(int(year), int(month))
-#     return render(request, 'reservations.html', {'calendar': cal})
 
 def home_page(request):
     # template path
