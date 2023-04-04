@@ -19,6 +19,35 @@
 			<form method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
+
+				<!--Time Field needs to be fixed, time should be a charfield with dropdown, not a timefield-->
+				<!--<p>
+					<label for="id_date">Date:</label>
+					<input type="date" name="date" required="" id="id_date">					
+				</p>
+
+				<p>
+					<label for="id_time">Time:</label>
+					<input type="char" name="time" required="" id="id_time" min="08:00" max="18:00">					
+				</p>
+
+				<p>
+					<label for="id_court">Court:</label>
+					<input type="number" name="court" required="" id="id_court" min="1" max="12">	
+				</p>
+
+				<p>
+					<label for="id_number_of_players">Number of players:</label>
+					<input type="number" name="number_of_players" required="" id="id_number_of_players" min="1" max="4">									
+				</p>
+
+				<p>
+					<label for="id_number_of_guests">Number of guests:</label>
+					<input type="number" name="number_of_guests" required="" id="id_number_of_guests" min="0" max="3">									
+				</p>
+				<button type="submit">Reserve</button>
+			</form>-->
+
 				<button type="submit">Reserve</button>
 			</form>
 		</div>
