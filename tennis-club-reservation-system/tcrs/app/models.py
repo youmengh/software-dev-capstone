@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-
 class NewsFeed(models.Model):  # This model is for displaying updates and news on the home page
     text = models.TextField()
 
@@ -35,7 +34,9 @@ class PaymentInfo(models.Model):
 class Reservation(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateField(max_length=8, default="mm/dd/yy")
+    time = models.TimeField(default='08:00:00')
     court = models.IntegerField(validators=[MaxValueValidator(12),MinValueValidator(1)])
     number_of_players = models.IntegerField(validators=[MaxValueValidator(4),MinValueValidator(1)])
-    number_of_guests = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(1)])
+    number_of_guests = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(0)])
+    is_tournament = models.BooleanField(default=False)

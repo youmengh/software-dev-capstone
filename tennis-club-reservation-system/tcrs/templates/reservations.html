@@ -46,6 +46,32 @@
 				<button type="submit">Reserve</button>
 			</form>
 		</div>
+		<div class="memberform">
+			<section>
+				<br>
+				<table class="table">
+				<thead>
+					<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Date</th>
+					<th scope="col">Time</th>
+					<th scope="col">Court</th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for reservation in reservations%}
+					<tr>
+					<td>{{reservation.user}}</td>
+					<td>{{reservation.date}}</td>
+					<td>{{reservation.time}}</td>
+					<td>{{reservation.court}}</td>
+					</tr>
+					{%endfor%}
+				</tbody>
+				</table>
+				<br>
+			</section>
+		</div>
 	</main>
 
 	<footer>
