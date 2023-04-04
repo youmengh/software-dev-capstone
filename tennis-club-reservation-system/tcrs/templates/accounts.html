@@ -26,6 +26,12 @@
 			<h4>Account Created:</h4>
 			<p>{{ user.date_joined }}</p>
 		</div>
+		{% if user_reservation %}
+		<div class="memberform">
+			<h4>My Reservations</h4>
+			<p>You have a reservation on {{ user.reservation.date }} at {{ user.reservation.time }}, on Court {{ user.reservation.court }} with {{ user.reservation.number_of_players }} player(s)!</p>
+		</div>
+		{%endif%}
 	</main>
 	{% elif user.is_authenticated and not is_member %}
 	<header style="padding-top: 100px;">

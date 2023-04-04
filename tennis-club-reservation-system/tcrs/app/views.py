@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import NewsFeed, MemberProfile, Object
+from .models import NewsFeed, MemberProfile, Object, Reservation
 from .forms import UserSignupForm, MemberInformationForm
 from .models import NewsFeed, MemberProfile
 from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
@@ -58,12 +58,20 @@ def account_page(request):
         profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
+
+    # checks if user has a reservation to display, if no reservation view does not display My Reservations box
+    user_reservation = True
+    try:
+        user_reservation = Reservation.objects.get(date = request.user.reservation.date)
+    except Reservation.DoesNotExist:
+        user_reservation = False
     
     # code to view profile info from the database
     profile = MemberProfile.objects.all()
     context = {
         'profile': profile,
         'is_member': is_member,
+        'user_reservation': user_reservation,
     }
     # render the page
     return render(request, template_name, context)
@@ -79,7 +87,10 @@ def reservation_page(request):
         profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
+
+    reservations = Reservation.objects.all()
     context = {
+        'reservations': reservations,
         'is_member': is_member,
     }
 
@@ -90,7 +101,9 @@ def reservation_page(request):
                 profile = form.save(commit=False)
                 profile.user = request.user
                 profile.save()
+                # user.memberprofile.guest_count += user.reservation.number_of_guests
                 context = {
+                    'reservations': reservations,
                     'form': form,
                     'is_member': is_member,
                 }
@@ -99,6 +112,7 @@ def reservation_page(request):
     else:
         form = ReservationForm()
         context = {
+            'reservations': reservations,
             'form': form,
             'is_member': is_member,
         }

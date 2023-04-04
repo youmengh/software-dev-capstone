@@ -26,4 +26,4 @@ class ReservationForm(forms.ModelForm):
 	
 	class Meta:
 		model = Reservation
-		fields = ['date', 'court', 'number_of_players', 'number_of_guests']
+		fields = ['date', 'time', 'court', 'number_of_players', 'number_of_guests']

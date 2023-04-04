@@ -34,8 +34,21 @@ class PaymentInfo(models.Model):
 
 class Reservation(models.Model):
 
+
+    TIMESLOT_CHOICES = (
+        ('8:00', '8:00'),
+        ('9:30', '9:30'),
+        ('11:00', '11:00'),
+        ('12:30', '12:30'),
+        ('2:00', '2:00'),
+        ('3:30', '3:30'),
+        ('5:00','5:00'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateField(max_length=8, default="mm/dd/yy")
+    time = models.CharField(max_length=100, choices=TIMESLOT_CHOICES)
     court = models.IntegerField(validators=[MaxValueValidator(12),MinValueValidator(1)])
     number_of_players = models.IntegerField(validators=[MaxValueValidator(4),MinValueValidator(1)])
-    number_of_guests = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(1)])
+    number_of_guests = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(0)])
+    is_tournament = models.BooleanField(default=False)
