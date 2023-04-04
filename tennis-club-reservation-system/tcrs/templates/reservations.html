@@ -19,6 +19,25 @@
 			<form method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
+				<p>
+					<label for="id_date">Date:</label>
+					<input type="date" name="date" required="" id="id_date">					
+				</p>
+
+				<p>
+					<label for="id_court">Court:</label>
+					<input type="number" name="court" required="" id="id_court">	
+				</p>
+
+				<p>
+					<label for="id_number_of_players">Number of players:</label>
+					<input type="number" name="number_of_players" required="" id="id_number_of_players">									
+				</p>
+
+				<p>
+					<label for="id_number_of_guests">Number of guests:</label>
+					<input type="number" name="number_of_guests" required="" id="id_number_of_guests">									
+				</p>
 				<button type="submit">Reserve</button>
 			</form>
 		</div>
