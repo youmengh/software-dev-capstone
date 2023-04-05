@@ -1,0 +1,34 @@
+{% extends "base.html" %} <!--Uses base.html to generate header with link-->
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="../static/css/style.css">
+	<title>The Tennis Club</title>
+</head>
+
+<body>
+<header style="padding-top: 100px;">
+    <h1>Yearly Membership Fee</h1>
+</header>
+<main>
+    <div class="memberform">
+        <h2>Pay Your Yearly Fee</h2>
+        <h4>Your total bill is $400.00</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>I'm Paying By Check</button>
+            <button type="submit">Submit info</button>
+        </form>
+    </div>
+</main>
+<footer>
+    <p>Copyright © 2023 HCC Inc.</p>
+</footer>
+</body>
+
+
+</html>
+{% endblock content %}
