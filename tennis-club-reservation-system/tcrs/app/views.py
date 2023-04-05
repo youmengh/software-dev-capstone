@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import NewsFeed, MemberProfile, Object, Reservation
+from .models import NewsFeed, MemberProfile, Object, Reservation, PaymentInfo
 from .forms import UserSignupForm, MemberInformationForm
 from .models import NewsFeed, MemberProfile
 from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
@@ -18,7 +18,7 @@ def home_page(request):
     template_name = 'home.html'
 
     # DISPLAYING NEWS FEED
-    messages = NewsFeed.objects.all()
+    messages = NewsFeed.objects.order_by('-date')
     context = {
         'messages': messages
     }
@@ -66,7 +66,7 @@ def reservation_page(request):
     except MemberProfile.DoesNotExist:
         is_member = False
 
-    reservations = Reservation.objects.all()
+    reservations = Reservation.objects.order_by('date')
     context = {
         'reservations': reservations,
         'is_member': is_member,
@@ -150,7 +150,7 @@ def directory_page(request):
     email = User.email
 
     # code to view accounts from the database
-    profiles = MemberProfile.objects.all()
+    profiles = MemberProfile.objects.order_by('last_name')
     context = {
         'profiles': profiles,
         'is_member': is_member,
@@ -195,18 +195,23 @@ def payment_page(request):
             if form.is_valid():
                 profile = form.save(commit=False)
                 profile.user = request.user
+                profile.initial_payment = True
                 profile.save()
+                payment = PaymentInfo.objects.all()
                 context = {
                     'form': form,
                     'is_member': is_member,
+                    'payment': payment,
                 }
                 return redirect('home')
                 
     else:
         form = PaymentInformationForm()
+        payment = PaymentInfo.objects.all()
         context = {
             'form': form,
             'is_member': is_member,
+            'payment': payment,
         }
 
 

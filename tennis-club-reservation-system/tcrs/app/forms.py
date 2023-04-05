@@ -14,7 +14,7 @@ class MemberInformationForm(forms.ModelForm):
 	
 	class Meta:
 		model = MemberProfile
-		fields = ['first_name', 'last_name', 'phone_number', 'address', 'date_of_birth']
+		fields = ['first_name', 'last_name', 'phone_number', 'address', 'date_of_birth', 'in_directory']
 
 class PaymentInformationForm(forms.ModelForm):
 	
