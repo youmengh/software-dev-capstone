@@ -9,14 +9,14 @@
 </head>
 
 <body>
-	{% if user.is_authenticated and is_member %}
+	{% if user.is_authenticated and is_member and not user.paymentinfo.initial_payment %}
 	<header style="padding-top: 100px;">
 		<h1>Club Membership Fee</h1>
 	</header>
 	<main>
 		<div class="memberform">
-			<h2>Make a Payment</h2>
-            <h4>Your total bill is $1,000.00</h4>
+			<h2>Registration Fee</h2>
+            <h4>Your total bill is $1,500.00</h4>
 			<form method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
@@ -26,13 +26,20 @@
 		</div>
 	</main>
 
-	{% elif user.is_authenticated and not is_member %}
+	{% elif user.is_authenticated and is_member and user.paymentinfo.initial_payment %}
 	<header style="padding-top: 100px;">
-		<h1>Your Membership</h1>
+		<h1>Club Membership Fee</h1>
 	</header>
 	<main>
-		<div class="accountbox">
-			<h4>You have been a member since {{ user.date_joined }}!</h4>
+		<div class="memberform">
+			<h2>Pay Your Yearly Fee</h2>
+            <h4>Your total bill is $400.00</h4>
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+                <button>I'm Paying By Check</button>
+				<button type="submit">Submit info</button>
+			</form>
 		</div>
 	</main>
 

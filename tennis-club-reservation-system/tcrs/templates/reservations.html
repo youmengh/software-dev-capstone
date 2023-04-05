@@ -61,7 +61,7 @@
 				<tbody>
 					{%for reservation in reservations%}
 					<tr>
-					<td>{{reservation.user}}</td>
+					<td>{{reservation.user.memberprofile.first_name}} {{reservation.user.memberprofile.last_name}} </td>
 					<td>{{reservation.date}}</td>
 					<td>{{reservation.time}}</td>
 					<td>{{reservation.court}}</td>

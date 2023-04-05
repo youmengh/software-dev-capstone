@@ -16,6 +16,8 @@ urlpatterns = [
     path("directory/", views.directory_page, name='directory'),
     path("signup/", views.signup_page, name="signup"),
     path("payment/", views.payment_page, name="payment"),
+    path("change_password/", views.change_password, name='change_password')
+    
     
     #path('calendar/<int:year>/<int:month>/', calendar_view, name='calendar')
 ]

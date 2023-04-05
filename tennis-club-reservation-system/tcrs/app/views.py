@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import NewsFeed, MemberProfile, Object, Reservation
+from .models import NewsFeed, MemberProfile, Object, Reservation, PaymentInfo
 from .forms import UserSignupForm, MemberInformationForm
 from .models import NewsFeed, MemberProfile
 from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from calendar import HTMLCalendar
-from datetime import datetime
 # Create your views here.
 
 
@@ -18,7 +18,7 @@ def home_page(request):
     template_name = 'home.html'
 
     # DISPLAYING NEWS FEED
-    messages = NewsFeed.objects.all()
+    messages = NewsFeed.objects.order_by('-date')
     context = {
         'messages': messages
     }
@@ -40,7 +40,7 @@ def account_page(request):
     # checks if user has a reservation to display, if no reservation view does not display My Reservations box
     user_reservation = True
     try:
-        user_reservation = Reservation.objects.get(date = request.user.reservation.date)
+        user_reservation = Reservation.objects.filter(court = request.user.reservation.court)
     except Reservation.DoesNotExist:
         user_reservation = False
     
@@ -66,7 +66,7 @@ def reservation_page(request):
     except MemberProfile.DoesNotExist:
         is_member = False
 
-    reservations = Reservation.objects.all()
+    reservations = Reservation.objects.order_by('date')
     context = {
         'reservations': reservations,
         'is_member': is_member,
@@ -85,7 +85,7 @@ def reservation_page(request):
                     'form': form,
                     'is_member': is_member,
                 }
-                return redirect('home')
+                return redirect('reservations')
                 
     else:
         form = ReservationForm()
@@ -150,7 +150,7 @@ def directory_page(request):
     email = User.email
 
     # code to view accounts from the database
-    profiles = MemberProfile.objects.all()
+    profiles = MemberProfile.objects.order_by('last_name')
     context = {
         'profiles': profiles,
         'is_member': is_member,
@@ -195,22 +195,39 @@ def payment_page(request):
             if form.is_valid():
                 profile = form.save(commit=False)
                 profile.user = request.user
+                profile.initial_payment = True
                 profile.save()
+                payment = PaymentInfo.objects.all()
                 context = {
                     'form': form,
                     'is_member': is_member,
+                    'payment': payment,
                 }
                 return redirect('home')
                 
     else:
         form = PaymentInformationForm()
+        payment = PaymentInfo.objects.all()
         context = {
             'form': form,
             'is_member': is_member,
+            'payment': payment,
         }
 
 
     return render(request, template_name, context)
 
-
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {'form': form})
  

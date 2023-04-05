@@ -14,16 +14,20 @@
 		<p>Brought to you by HCC Inc.</p>
 	</header>
 	<main>
-
-		<section style="text-align: center" ;>
-		<div class="accountbox">
-			<h2>News and Updates</h2>
+		<section>
+			<div class="accountbox">
+				<h2>News and Updates</h2>
+				<p>Welcome to the Tennis Club! This feed will keep you updated on news and updates in our club and the
+					world of tennis! Stay tuned!</p>
+			</div>
 			<ul>
 				{% for message in messages %}
-				<li>{{ message.text }}</li>
+				<div class="accountbox">
+					<li style="font-weight: bold">{{ message.date }}, {{ message.time }} - {{ message.title }}</li>
+					<li>{{ message.text }}</li>
+				</div>
 				{% endfor %}
 			</ul>
-		</div>	
 		</section>
 	</main>
 

@@ -25,6 +25,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Phone Number</th>
+                <th scope="col">Email Address</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                 <td>{{profile.first_name}} {{profile.last_name}}</td>
                 <td>{{profile.address}}</td>
                 <td>{{profile.phone_number}}</td>
+                <td>{{profile.user.email}}</td>
                 </tr>
                 {%endfor%}
             </tbody>

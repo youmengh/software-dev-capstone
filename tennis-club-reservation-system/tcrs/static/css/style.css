@@ -126,7 +126,7 @@ footer p {
     font-family: Arial;
     margin: 0 auto;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
 }
 
 .memberform {
@@ -143,3 +143,16 @@ footer p {
     padding-top: 10;
   }
 
+  .infobox {
+    background-color: white;
+    font-family: Arial;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    width: 60%;
+    border: 3px solid black;
+    padding: 10px;
+    padding-top: 10;
+  }
