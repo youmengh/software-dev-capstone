@@ -1,159 +1,159 @@
 /* list containing all links */
 .navbar_list {
-    list-style-type: none;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    margin: 0;
-    padding: 0px;
-    overflow: hidden;
-    background-color: white;
-  }
+  list-style-type: none;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  margin: 0;
+  padding: 0px;
+  overflow: hidden;
+  background-color: white;
+}
 
-  /* defines borders of each element of navbar */
-  .navbar {
-    font-family: Arial, sans-serif;
-    float: left;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
-  }
+/* defines borders of each element of navbar */
+.navbar {
+  font-family: Arial, sans-serif;
+  float: left;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
 
-  /* defines element format when it is the selected link */
-  .navbar a {
-    display: block;
-    color: black;
-    font-size: 20px;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
-  }
+/* defines element format when it is the selected link */
+.navbar a {
+  display: block;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+}
 
-  /* defines element color when selected */
-  .active {
-    background-color: #810000;
-    color: white;
-  }
+/* defines element color when selected */
+.active {
+  background-color: #810000;
+  color: white;
+}
 
-  /* defines navbar element when hovered over */
-  .navbar a:hover {
-    background-color: #810000;
-    color: white;
-  }
-  /* Message to display logged in user's name */
-  .login_message {
-    position: absolute;
-    top: 15px;
-    right: 50px;
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    text-align: center;
-    color: #810000;
-  }
+/* defines navbar element when hovered over */
+.navbar a:hover {
+  background-color: #810000;
+  color: white;
+}
+
+/* Message to display logged in user's name */
+.login_message {
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  color: #810000;
+}
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
 }
 
 header {
-    background-color: #810000;
-    color: #fff;
-    padding: 25px;
-    padding-top: 100px;
-    text-align: center;
+  background-color: #810000;
+  color: #fff;
+  padding: 25px;
+  padding-top: 100px;
+  text-align: center;
 }
 
 h1 {
-    margin: 0;
-    font-size: 40px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 p {
-    margin: 0;
-    font-size: 18px;
-    font-style: italic;
+  margin: 0;
+  font-size: 15px;
 }
 
 main {
-    padding: 25px;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+  padding: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 h2 {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 li {
-    font-size: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 footer {
-    background-color: #810000;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
+  background-color: #810000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 footer p {
-    margin: 0;
-    font-size: 16px;
+  margin: 0;
+  font-size: 16px;
 }
 
 /* For textboxes */
 
 .accountbox {
-    border: 3px solid black;
-    font-family: Arial;
-    margin: 0 auto;
-    text-align: center;
-    padding: 10px;
+  border: 3px solid black;
+  font-family: Arial;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
 }
 
 .memberform {
-    background-color: white;
-    font-family: Arial;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-    width: 40%;
-    border: 3px solid black;
-    padding: 5px;
-    text-align: center;
-    padding-top: 10;
-  }
+  background-color: white;
+  font-family: Arial;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  width: 40%;
+  border: 3px solid black;
+  padding: 5px;
+  text-align: center;
+  padding-top: 10;
+}
 
-  .infobox {
-    background-color: white;
-    font-family: Arial;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
-    width: 60%;
-    border: 3px solid black;
-    padding: 10px;
-    padding-top: 10;
-  }
+.infobox {
+  background-color: white;
+  font-family: Arial;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  width: 60%;
+  border: 3px solid black;
+  padding: 10px;
+  padding-top: 10;
+}

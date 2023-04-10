@@ -24,7 +24,7 @@
 				{% for message in messages %}
 				<div class="accountbox">
 					<li style="font-weight: bold">{{ message.date }}, {{ message.time }} - {{ message.title }}</li>
-					<li>{{ message.text }}</li>
+					<p>{{ message.text }}</p>
 				</div>
 				{% endfor %}
 			</ul>
