@@ -42,6 +42,9 @@ class PaymentInfo(models.Model):
     initial_payment = models.BooleanField(default=False)
     yearly_payment_due = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'{self.user.username} Payment Information' #show how we want it to be displayed
+
 class Reservation(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -51,3 +54,6 @@ class Reservation(models.Model):
     number_of_players = models.IntegerField(validators=[MaxValueValidator(4),MinValueValidator(1)])
     number_of_guests = models.IntegerField(validators=[MaxValueValidator(3),MinValueValidator(0)])
     is_tournament = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user.username} Reservation' #show how we want it to be displayed
