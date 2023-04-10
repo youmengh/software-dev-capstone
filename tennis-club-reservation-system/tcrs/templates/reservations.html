@@ -72,6 +72,14 @@
 				<br>
 			</section>
 		</div>
+		{% for reservation in reservations %}
+		{% if reservation.is_tournament %}
+		<div class="memberform">
+				There is a tournament on {{reservation.date}} at {{reservation.time}}!
+		</div>
+		{% endif %}
+		{% endfor %}
+
 	</main>
 
 	<footer>

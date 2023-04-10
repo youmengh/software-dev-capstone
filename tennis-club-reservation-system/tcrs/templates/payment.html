@@ -26,23 +26,6 @@
 		</div>
 	</main>
 
-	{% elif user.is_authenticated and is_member and user.paymentinfo.initial_payment %}
-	<header style="padding-top: 100px;">
-		<h1>Club Membership Fee</h1>
-	</header>
-	<main>
-		<div class="memberform">
-			<h2>Pay Your Yearly Fee</h2>
-            <h4>Your total bill is $400.00</h4>
-			<form method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-                <button>I'm Paying By Check</button>
-				<button type="submit">Submit info</button>
-			</form>
-		</div>
-	</main>
-
 	{% else %}
 	<header style="padding-top: 100px;">
 		<h1>Apply for Club Membership</h1>
