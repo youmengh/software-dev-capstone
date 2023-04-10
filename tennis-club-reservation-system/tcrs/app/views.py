@@ -231,3 +231,44 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'registration/change_password.html', {'form': form})
  
+def billing_page(request):
+     # template path
+    template_name = 'billing.html'
+
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
+
+    if request.method == 'POST':
+            
+            form = PaymentInformationForm(request.POST, instance=request.user.paymentinfo)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.yearly_payment_due = False
+                profile.save()
+                payment = PaymentInfo.objects.all()
+                context = {
+                    'form': form,
+                    'is_member': is_member,
+                    'payment': payment,
+                }
+                return redirect('home')
+                
+    else:
+        form = PaymentInformationForm()
+        payment = PaymentInfo.objects.all()
+        context = {
+            'form': form,
+            'is_member': is_member,
+            'payment': payment,
+        }
+
+
+    return render(request, template_name, context)

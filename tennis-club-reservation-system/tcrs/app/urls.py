@@ -16,6 +16,7 @@ urlpatterns = [
     path("directory/", views.directory_page, name='directory'),
     path("signup/", views.signup_page, name="signup"),
     path("payment/", views.payment_page, name="payment"),
+    path("billing/", views.billing_page, name="billing"),
     path("change_password/", views.change_password, name='change_password')
     
     
