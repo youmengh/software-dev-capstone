@@ -30,12 +30,14 @@
             </thead>
             <tbody>
                 {%for profile in profiles%}
+                {%if profile.in_directory%}
                 <tr>
                 <td>{{profile.first_name}} {{profile.last_name}}</td>
                 <td>{{profile.address}}</td>
                 <td>{{profile.phone_number}}</td>
                 <td>{{profile.user.email}}</td>
                 </tr>
+                {%endif%}
                 {%endfor%}
             </tbody>
             </table>
