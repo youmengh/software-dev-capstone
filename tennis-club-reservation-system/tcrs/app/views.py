@@ -189,6 +189,7 @@ def payment_page(request):
         'is_member': is_member,
     }
 
+
     if request.method == 'POST':
             
             form = PaymentInformationForm(request.POST)
@@ -245,6 +246,10 @@ def billing_page(request):
         'is_member': is_member,
     }
 
+    fee = 400
+    guest = (request.user.reservation.number_of_guests * 10)
+    total = fee + guest
+
     if request.method == 'POST':
             
             form = PaymentInformationForm(request.POST, instance=request.user.paymentinfo)
@@ -258,6 +263,9 @@ def billing_page(request):
                     'form': form,
                     'is_member': is_member,
                     'payment': payment,
+                    'fee': fee,
+                    'guest': guest,
+                    'total': total,
                 }
                 return redirect('home')
                 
@@ -268,6 +276,9 @@ def billing_page(request):
             'form': form,
             'is_member': is_member,
             'payment': payment,
+            'fee': fee,
+            'guest': guest,
+            'total': total,
         }
 
 
