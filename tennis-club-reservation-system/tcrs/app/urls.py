@@ -18,8 +18,8 @@ urlpatterns = [
     path("payment/", views.payment_page, name="payment"),
     path("billing/", views.billing_page, name="billing"),
     path("change_password/", views.change_password, name='change_password'),
-    path("guest_info/", views.guest_info_page, name='guest_info')
-    
+    path("guest_info/", views.guest_info_page, name='guest_info'),
+    path("cancel_reservation/", views.cancel_reservation, name='cancel_reservation'),
     
     #path('calendar/<int:year>/<int:month>/', calendar_view, name='calendar')
 ]

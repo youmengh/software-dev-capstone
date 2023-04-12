@@ -32,6 +32,8 @@
 			<h4>My Reservations</h4>
 			{% if user_reservation %}
 			<p>You have a reservation on {{ user.reservation.date }} at {{ user.reservation.time }}, on Court {{ user.reservation.court }} with {{ user.reservation.number_of_players }} player(s)!</p>
+			<h4>Cancel Your Reservation</h4>
+			<a class="btn btn-primary" href="/cancel_reservation">Cancel</a>			
 			{%else%}
 			<p>You do not have any active reservations.</p>
 			{%endif%}

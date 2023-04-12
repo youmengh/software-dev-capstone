@@ -1,9 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views.generic import TemplateView
-from .models import NewsFeed, MemberProfile, Object, Reservation, PaymentInfo
-from .forms import UserSignupForm, MemberInformationForm
-from .models import NewsFeed, MemberProfile
+from .models import NewsFeed, MemberProfile, Reservation, PaymentInfo
 from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm, GuestForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -86,7 +82,10 @@ def reservation_page(request):
                     'form': form,
                     'is_member': is_member,
                 }
-                return redirect('guest_info')
+                if profile.number_of_guests > 0:
+                    return redirect('guest_info')
+                else:
+                    return redirect('reservations')
                 
     else:
         form = ReservationForm()
@@ -97,6 +96,13 @@ def reservation_page(request):
         }
 
     return render(request, template_name, context)
+
+@login_required(login_url='signup')
+def cancel_reservation(request):
+    reservation = request.user.reservation
+    reservation.delete()
+    return redirect('account')
+
 
 @login_required(login_url='signup')
 def membership_page(request):
@@ -168,7 +174,6 @@ def signup_page(request):
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
-                messages.success(request, f'Your account has been created!')
                 return redirect('login')
     else:
         form = UserSignupForm()
@@ -219,6 +224,7 @@ def payment_page(request):
 
     return render(request, template_name, context)
 
+@login_required(login_url='signup')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -233,6 +239,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'registration/change_password.html', {'form': form})
  
+@login_required(login_url='signup')
 def billing_page(request):
      # template path
     template_name = 'billing.html'
@@ -285,6 +292,7 @@ def billing_page(request):
 
     return render(request, template_name, context)
 
+@login_required(login_url='signup')
 def guest_info_page(request):
     # template path
     template_name = 'guest_info.html'
