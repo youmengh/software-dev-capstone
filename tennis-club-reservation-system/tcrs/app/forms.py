@@ -21,7 +21,7 @@ class PaymentInformationForm(forms.ModelForm):
 	
 	class Meta:
 		model = PaymentInfo
-		fields = ['card_number', 'cvv', 'expiration_date', 'payment_saved']
+		fields = ['card_number', 'CVV', 'expiration_date', 'payment_saved']
 
 
 class ReservationForm(forms.ModelForm):

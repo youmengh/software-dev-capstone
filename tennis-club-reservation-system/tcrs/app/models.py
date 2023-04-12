@@ -28,9 +28,9 @@ class MemberProfile(models.Model):
     
 class PaymentInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    card_number = models.CharField(max_length=16)
-    cvv = models.CharField(max_length=3)
-    expiration_date = models.CharField(max_length=5)
+    card_number = models.CharField(max_length=16, blank=True)
+    CVV = models.CharField(max_length=3, blank=True)
+    expiration_date = models.CharField(max_length=5, blank=True)
     payment_saved = models.BooleanField()
     initial_payment = models.BooleanField(default=False)
     yearly_payment_due = models.BooleanField(default=True)
