@@ -15,13 +15,6 @@
 	</header>
 	<main>
 		<div class="accountbox">
-			{% if user.is_superuser %}
-			<h4>System Permissions:</h4>
-			<p>Administrator</p>
-			{% elif user.is_staff %}
-			<h4>System Permissions:</h4>
-			<p>Club Staff</p>
-			{% endif %}
 			<h4>Full Name:</h4>
 			<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
 			<h4>Email Address:</h4>
@@ -45,7 +38,11 @@
 			<p>You do not have any active reservations.</p>
 			{% endif %}
 			<h4>Account Settings</h4>
-			<br>
+			{% if user.is_superuser %}
+			<h4>System Permissions: Administrator</h4>
+			{% elif user.is_staff %}
+			<h4>System Permissions: Club Staff</h4>
+			{% endif %}
 			<a class="btn btn-primary" href="/change_password">Change Password</a>
 		</div>
 	</main>
