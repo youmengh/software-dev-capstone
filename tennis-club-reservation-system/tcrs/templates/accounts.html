@@ -15,6 +15,13 @@
 	</header>
 	<main>
 		<div class="accountbox">
+			{% if user.is_superuser %}
+			<h4>System Permissions:</h4>
+			<p>Administrator</p>
+			{% elif user.is_staff %}
+			<h4>System Permissions:</h4>
+			<p>Club Staff</p>
+			{% endif %}
 			<h4>Full Name:</h4>
 			<p>{{ user.memberprofile.first_name }} {{ user.memberprofile.last_name }} </p>
 			<h4>Email Address:</h4>
@@ -34,9 +41,9 @@
 			<p>You have a reservation on {{ user.reservation.date }} at {{ user.reservation.time }}, on Court {{ user.reservation.court }} with {{ user.reservation.number_of_players }} player(s)!</p>
 			<h4>Cancel Your Reservation</h4>
 			<a class="btn btn-primary" href="/cancel_reservation">Cancel</a>			
-			{%else%}
+			{% else %}
 			<p>You do not have any active reservations.</p>
-			{%endif%}
+			{% endif %}
 			<h4>Account Settings</h4>
 			<br>
 			<a class="btn btn-primary" href="/change_password">Change Password</a>
@@ -52,7 +59,7 @@
 			<button>Change Password</button>
 		</div>
 	</main>
-	{%else%}
+	{% else %}
 	<header style="padding-top: 100px;">
 		<h1>Account Information</h1>
 	</header>
@@ -61,7 +68,7 @@
 			<h2>Please sign in or create an account to view your member profile.</h2>
 		</section>
 	</main>
-	{%endif%}
+	{% endif %}
 
 	<footer>
 		<p>Copyright © 2023 HCC Inc.</p>

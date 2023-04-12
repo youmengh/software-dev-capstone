@@ -30,7 +30,7 @@ def account_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
 
@@ -59,7 +59,7 @@ def reservation_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
 
@@ -122,7 +122,7 @@ def membership_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
     context = {
@@ -160,7 +160,7 @@ def directory_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
 
@@ -168,8 +168,10 @@ def directory_page(request):
 
     # code to view accounts from the database
     profiles = MemberProfile.objects.order_by('last_name')
+    users = User.objects.order_by('first_name')
     context = {
         'profiles': profiles,
+        'users': users,
         'is_member': is_member,
     }
     # render the page
@@ -198,7 +200,7 @@ def payment_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
     context = {
@@ -257,7 +259,7 @@ def billing_page(request):
     # checks if member profile data exists, second level authentication for members only 
     is_member = True
     try:
-        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+        profile = MemberProfile.objects.filter(first_name = request.user.memberprofile.first_name)
     except MemberProfile.DoesNotExist:
         is_member = False
     context = {

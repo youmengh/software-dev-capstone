@@ -130,6 +130,16 @@ footer p {
   padding: 10px;
 }
 
+.directorybox {
+  background-color: white;
+  border: 3px solid black;
+  font-family: Arial;
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+  padding: 10px;
+}
+
 .memberform {
   background-color: white;
   font-family: Arial;

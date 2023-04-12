@@ -16,9 +16,37 @@
 		<h1>Member Directory</h1>
 	</header>
 	<main>
-        <div class="accountbox">
+        <div class="directorybox">
+            <h4>Club and Site Staff</h4>
+            <section>
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Staff</th>
+                    <th scope="col">Office</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Email Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    {% if user.is_staff or user.is_superuser %}
+                    <tr>
+                    <td>{{user.memberprofile.first_name}} {{user.memberprofile.last_name}}</td>
+                    <td>{{user.memberprofile.address}}</td>
+                    <td>{{user.memberprofile.phone_number}}</td>
+                    <td>{{user.email}}</td>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                </tbody>
+                </table>
+                <br>
+            </section>
+        </div>
+        <div class="directorybox">
 		<section>
-			<br>
+			<h4>Club Members</h4>
             <table class="table">
             <thead>
                 <tr>
@@ -30,7 +58,7 @@
             </thead>
             <tbody>
                 {%for profile in profiles%}
-                {%if profile.in_directory%}
+                {%if profile.in_directory %}
                 <tr>
                 <td>{{profile.first_name}} {{profile.last_name}}</td>
                 <td>{{profile.address}}</td>
