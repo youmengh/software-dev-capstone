@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import MemberProfile, PaymentInfo, Reservation
+from .models import MemberProfile, PaymentInfo, Reservation, Guest
+
 
 class UserSignupForm(UserCreationForm):
 	email = forms.EmailField()
@@ -28,3 +29,9 @@ class ReservationForm(forms.ModelForm):
 	class Meta:
 		model = Reservation
 		fields = ['date', 'time', 'court', 'number_of_players', 'number_of_guests']
+
+class GuestForm(forms.ModelForm):
+	
+	class Meta:
+		model = Guest
+		fields = ['first_name', 'last_name']

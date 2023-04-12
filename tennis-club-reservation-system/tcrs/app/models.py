@@ -24,7 +24,7 @@ class MemberProfile(models.Model):
 
 
     def __str__(self):
-        return f'{self.user.username} Profile' #show how we want it to be displayed
+        return f'{self.user.username}\'s Profile' #show how we want it to be displayed
 
 class Object(models.Model):
     title = models.CharField(max_length=200)
@@ -43,7 +43,7 @@ class PaymentInfo(models.Model):
     yearly_payment_due = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.user.username} Payment Information' #show how we want it to be displayed
+        return f'{self.user.username}\'s Payment Information' #show how we want it to be displayed
 
 class Reservation(models.Model):
 
@@ -56,4 +56,13 @@ class Reservation(models.Model):
     is_tournament = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.user.username} Reservation' #show how we want it to be displayed
+        return f'{self.user.username}\'s Reservation' #show how we want it to be displayed
+    
+class Guest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    last_name = models.CharField(max_length=100, default="")
+    first_name = models.CharField(max_length=100, default="")
+    games_played = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} - {self.user.username}\'s Guest' #show how we want it to be displayed

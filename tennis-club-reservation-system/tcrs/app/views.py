@@ -4,12 +4,13 @@ from django.views.generic import TemplateView
 from .models import NewsFeed, MemberProfile, Object, Reservation, PaymentInfo
 from .forms import UserSignupForm, MemberInformationForm
 from .models import NewsFeed, MemberProfile
-from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm
+from .forms import UserSignupForm, MemberInformationForm, PaymentInformationForm, ReservationForm, GuestForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.forms import formset_factory
 # Create your views here.
 
 
@@ -85,7 +86,7 @@ def reservation_page(request):
                     'form': form,
                     'is_member': is_member,
                 }
-                return redirect('reservations')
+                return redirect('guest_info')
                 
     else:
         form = ReservationForm()
@@ -279,6 +280,49 @@ def billing_page(request):
             'fee': fee,
             'guest': guest,
             'total': total,
+        }
+
+
+    return render(request, template_name, context)
+
+def guest_info_page(request):
+    # template path
+    template_name = 'guest_info.html'
+
+    # checks if member profile data exists, second level authentication for members only 
+    is_member = True
+    try:
+        profile = MemberProfile.objects.get(first_name = request.user.memberprofile.first_name)
+    except MemberProfile.DoesNotExist:
+        is_member = False
+    context = {
+        'is_member': is_member,
+    }
+
+    GuestFormSet = formset_factory(GuestForm, extra = request.user.reservation.number_of_guests)
+
+    if request.method == 'POST':
+            
+        formset = GuestFormSet(request.POST)
+      
+        # print formset data if it is valid
+        if formset.is_valid():
+            for form in formset:
+                if form.is_valid():
+                    profile = form.save(commit=False)
+                    profile.user = request.user
+                    profile.save()
+                    context = {
+                        'formset': formset,
+                        'is_member': is_member,
+                    }
+            return redirect('reservations')
+                
+    else:
+        formset = GuestFormSet(request.POST or None)
+        context = {
+            'formset': formset,
+            'is_member': is_member,
         }
 
 
