@@ -25,13 +25,6 @@ class MemberProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username}\'s Profile' #show how we want it to be displayed
-
-class Object(models.Model):
-    title = models.CharField(max_length=200)
-    date = models.DateTimeField()
-    
-    def __str__(self):
-        return self.title
     
 class PaymentInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
