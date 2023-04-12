@@ -264,8 +264,18 @@ def billing_page(request):
         'is_member': is_member,
     }
 
+    # checks if user has a reservation to display, if no reservation view does not display My Reservations box
+    user_reservation = True
+    try:
+        user_reservation = Reservation.objects.filter(court = request.user.reservation.court)
+    except Reservation.DoesNotExist:
+        user_reservation = False
+
     fee = 400
-    guest = (request.user.reservation.number_of_guests * 10)
+    if user_reservation:
+        guest = (request.user.reservation.number_of_guests * 10)
+    else:
+        guest = 0
     total = fee + guest
 
     if request.method == 'POST':
