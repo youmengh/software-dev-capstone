@@ -21,53 +21,57 @@
 				<!-- {{ form.as_p }} -->
 				<p>
 					<label for="id_date">Date:</label>
-					<input type="date" name="date" required="" id="id_date">					
+					<input type="date" name="date" required="" id="id_date">
 				</p>
 
 				<p>
 					<label for="id_time">Time:</label>
-					<input type="time" name="time" required="" id="id_time" min="08:00" max="18:00">					
+					<input type="time" name="time" required="" id="id_time" min="08:00" max="18:00">
 				</p>
 
 				<p>
 					<label for="id_court">Court:</label>
-					<input type="number" name="court" required="" id="id_court" min="1" max="12">	
+					<input type="number" name="court" required="" id="id_court" min="1" max="12">
 				</p>
 
 				<p>
 					<label for="id_number_of_players">Number of players:</label>
-					<input type="number" name="number_of_players" required="" id="id_number_of_players" min="1" max="4">									
+					<input type="number" name="number_of_players" required="" id="id_number_of_players" min="1" max="4">
 				</p>
 
 				<p>
 					<label for="id_number_of_guests">Number of guests:</label>
-					<input type="number" name="number_of_guests" required="" id="id_number_of_guests" min="0" max="3">									
+					<input type="number" name="number_of_guests" required="" id="id_number_of_guests" min="0" max="3">
 				</p>
 				<button type="submit">Reserve</button>
 			</form>
+			{% if reservation_failed %}
+			<script>alert("This reservation is already taken.")</script>
+			{% endif %}
 		</div>
 		<div class="memberform">
 			<section>
 				<br>
 				<table class="table">
-				<thead>
-					<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Date</th>
-					<th scope="col">Time</th>
-					<th scope="col">Court</th>
-					</tr>
-				</thead>
-				<tbody>
-					{%for reservation in reservations%}
-					<tr>
-					<td>{{reservation.user.memberprofile.first_name}} {{reservation.user.memberprofile.last_name}} </td>
-					<td>{{reservation.date}}</td>
-					<td>{{reservation.time}}</td>
-					<td>{{reservation.court}}</td>
-					</tr>
-					{%endfor%}
-				</tbody>
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+							<th scope="col">Court</th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for reservation in reservations%}
+						<tr>
+							<td>{{reservation.user.memberprofile.first_name}}
+								{{reservation.user.memberprofile.last_name}} </td>
+							<td>{{reservation.date}}</td>
+							<td>{{reservation.time}}</td>
+							<td>{{reservation.court}}</td>
+						</tr>
+						{%endfor%}
+					</tbody>
 				</table>
 				<br>
 			</section>
@@ -75,7 +79,7 @@
 		{% for reservation in reservations %}
 		{% if reservation.is_tournament %}
 		<div class="memberform">
-				There is a tournament on {{reservation.date}} at {{reservation.time}}!
+			There is a tournament on {{reservation.date}} at {{reservation.time}}!
 		</div>
 		{% endif %}
 		{% endfor %}
@@ -86,7 +90,7 @@
 		<p>&copy; 2023 Tennis Reservation. All rights reserved.</p>
 	</footer>
 
-	
+
 	{% elif user.is_authenticated and not is_member %}
 	<main>
 		<section style="text-align: center" ;>

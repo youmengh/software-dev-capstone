@@ -69,23 +69,32 @@ def reservation_page(request):
         'is_member': is_member,
     }
 
+    reservation_failed = False
+
     if request.method == 'POST':
             
             form = ReservationForm(request.POST)
             if form.is_valid():
                 profile = form.save(commit=False)
                 profile.user = request.user
-                profile.save()
+                selected_date = form.cleaned_data.get('date')
+                selected_time = form.cleaned_data.get('time')
+                selected_court = form.cleaned_data.get('court')
+                if Reservation.objects.filter(date = selected_date).exists() and Reservation.objects.filter(time = selected_time).exists() and Reservation.objects.filter(court = selected_court).exists():
+                    reservation_failed = True
+                    messages.info(request, 'This reservation has already been taken!')
+                else:
+                    profile.save()
                 # user.memberprofile.guest_count += user.reservation.number_of_guests
                 context = {
                     'reservations': reservations,
                     'form': form,
                     'is_member': is_member,
+                    'reservation_failed': reservation_failed
                 }
-                if profile.number_of_guests > 0:
+                
+                if profile.number_of_guests > 0 and not reservation_failed:
                     return redirect('guest_info')
-                else:
-                    return redirect('reservations')
                 
     else:
         form = ReservationForm()
@@ -93,6 +102,7 @@ def reservation_page(request):
             'reservations': reservations,
             'form': form,
             'is_member': is_member,
+            'reservation_failed': reservation_failed
         }
 
     return render(request, template_name, context)
