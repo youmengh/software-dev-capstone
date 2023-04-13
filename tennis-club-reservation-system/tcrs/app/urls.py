@@ -20,6 +20,7 @@ urlpatterns = [
     path("change_password/", views.change_password, name='change_password'),
     path("guest_info/", views.guest_info_page, name='guest_info'),
     path("cancel_reservation/", views.cancel_reservation, name='cancel_reservation'),
+    path("cancel_membership/", views.cancel_membership, name='cancel_membership'),
     
     #path('calendar/<int:year>/<int:month>/', calendar_view, name='calendar')
 ]
