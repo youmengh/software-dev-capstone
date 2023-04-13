@@ -15,7 +15,10 @@
 <main>
     <div class="memberform">
         <h2>Pay Your Yearly Fee</h2>
-        <h4>Your total bill is $400.00</h4>
+        <h4>Base Yearly Fee: ${{fee}}.00</h4>
+        <h4>Guest Fee: ${{guest}}.00</h4>
+        <h4>Your Total: ${{total}}.00</h4>
+        <h3>Please enter your card information or indicate check payment below</h3>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

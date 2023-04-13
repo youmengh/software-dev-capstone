@@ -22,7 +22,7 @@
     <li class="navbar"><a href="{% url 'login' %}">Log In</a></li>
     <li class="navbar"><a href="{% url 'signup' %}">Sign Up</a></li>
   {% endif %}
-  {% if user.is_superuser %}  
+  {% if user.is_superuser or user.is_staff%}  
     <li class="navbar"><a href="{% url 'admin:index' %}">Admin Settings</a></li>
   {% endif %}  
   </ul>
