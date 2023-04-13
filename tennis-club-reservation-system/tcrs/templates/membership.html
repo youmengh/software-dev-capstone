@@ -32,12 +32,19 @@
 		<div class="accountbox">
 			<h2>Your Membership Information</h2>
 			<h4>You have been a member since {{ user.date_joined }}!</h4>
+			<h4>Your membership will renew on January 1, 2024.</h4>
 			<h4>Your next membership charge will be due on March 1, 2024.</h4>
+			<h2>Pay Your Balance</h2>
 			{% if user.paymentinfo.initial_payment %}
 			<a class="btn btn-primary" href="/billing">Make a Payment</a>
 			{%else%}
 			<a class="btn btn-primary" href="/payment">Make a Payment</a>
 			{%endif%}
+			<h2>Cancel Your Membership</h2>
+			<h4>You must cancel before October 1, 2023 to avoid extra fees.</h4>
+			<h4>This action CANNOT BE UNDONE.</h4>
+			<a class="btn btn-primary" href="/cancel_membership">Cancel</a>
+
 		</div>
 	</main>
 
