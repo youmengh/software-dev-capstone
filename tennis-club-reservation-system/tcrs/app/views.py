@@ -153,6 +153,12 @@ def membership_page(request):
     return render(request, template_name, context)
 
 @login_required(login_url='signup')
+def cancel_membership(request):
+    profile = request.user.memberprofile
+    profile.delete()
+    return redirect('home')
+
+@login_required(login_url='signup')
 def directory_page(request):
     # template path
     template_name = 'directory.html'
