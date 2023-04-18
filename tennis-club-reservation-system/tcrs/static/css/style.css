@@ -2,26 +2,23 @@
 .navbar_list {
   list-style-type: none;
   position: fixed;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  background-color: #810000;
   width: 100%;
-  top: 0;
-  margin: 0;
-  padding: 0px;
-  overflow: hidden;
-  background-color: white;
 }
 
 /* defines borders of each element of navbar */
 .navbar {
-  font-family: Arial, sans-serif;
   float: left;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  background-color: #810000;
 }
 
 /* defines element format when it is the selected link */
 .navbar a {
   display: block;
-  color: black;
+  color: white;
+  font-family: Cambria, serif;
   font-size: 20px;
   text-align: center;
   padding: 10px 20px;
@@ -37,18 +34,18 @@
 /* defines navbar element when hovered over */
 .navbar a:hover {
   background-color: #810000;
-  color: white;
+  color: gold;
 }
 
 /* Message to display logged in user's name */
 .login_message {
   position: absolute;
-  top: 15px;
-  right: 50px;
-  font-family: Arial, sans-serif;
+  top: 10px;
+  right: 30px;
+  font-family: Cambria, serif;
   font-size: 20px;
   text-align: center;
-  color: #810000;
+  color: white;
 }
 
 body {
@@ -68,6 +65,7 @@ header {
 
 h1 {
   margin: 0;
+  font-family: Cambria, serif;
   font-size: 40px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -75,7 +73,8 @@ h1 {
 
 p {
   margin: 0;
-  font-size: 15px;
+  font-family: Cambria, serif;
+  font-size: 18px;
 }
 
 main {
@@ -87,8 +86,9 @@ main {
 }
 
 h2 {
-  font-size: 32px;
-  color: #333;
+  font-family: Cambria, serif;
+  font-size: 30px;
+  color: black;
   margin-bottom: 20px;
 }
 
@@ -99,7 +99,9 @@ ul {
 }
 
 li {
+  font-family: Cambria, serif;
   font-size: 20px;
+  color: black;
   margin-bottom: 10px;
 }
 

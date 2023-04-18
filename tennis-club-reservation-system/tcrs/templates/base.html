@@ -16,15 +16,15 @@
     <li class="navbar"><a href="{% url 'reservations' %}">Reservations</a></li>
     <li class="navbar"><a href="{% url 'membership' %}">Membership</a></li>
     <li class="navbar"><a href="{% url 'directory' %}">Directory</a></li>
-  {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <li class="navbar"><a href="{% url 'logout' %}">Log Out</a></li>
-  {% else %}
+    {% else %}
     <li class="navbar"><a href="{% url 'login' %}">Log In</a></li>
     <li class="navbar"><a href="{% url 'signup' %}">Sign Up</a></li>
-  {% endif %}
-  {% if user.is_superuser or user.is_staff%}  
+    {% endif %}
+    {% if user.is_superuser or user.is_staff%}
     <li class="navbar"><a href="{% url 'admin:index' %}">Admin Settings</a></li>
-  {% endif %}  
+    {% endif %}
   </ul>
 
   <!--login display for if you're logged in or not-->
@@ -33,6 +33,8 @@
   <p class="login_message">Welcome, {{user.username}}!</p>
   {% endif %}
   {% endblock %}
+
+</body>
 
 </html>
 
