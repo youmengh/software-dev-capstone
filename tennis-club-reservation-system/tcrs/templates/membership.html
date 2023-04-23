@@ -24,7 +24,31 @@
 		</div>
 	</main>
 
-	{% elif user.is_authenticated and is_member %}
+	{% elif user.is_authenticated and is_member and user.paymentinfo.yearly_payment_due %}
+	<header style="padding-top: 100px;">
+		<h1>Membership and Payment</h1>
+	</header>
+	<main>
+		<div class="accountbox">
+			<h2>Your Membership Information</h2>
+			<h4>You have been a member since {{ user.date_joined }}!</h4>
+			<h4>Your membership will renew on January 1, 2024.</h4>
+			<h4>You have had an outstanding balance since March 1, 2023.</h4>
+			<h2>Pay Your Yearly Balance for 2023</h2>
+			{% if user.paymentinfo.initial_payment %}
+			<a class="btn btn-primary" href="/billing">Make a Payment</a>
+			{%else%}
+			<a class="btn btn-primary" href="/payment">Make a Payment</a>
+			{%endif%}
+			<h2>Cancel Your Membership</h2>
+			<h4>You must cancel before October 1, 2023 to avoid extra fees.</h4>
+			<h4>This action CANNOT BE UNDONE.</h4>
+			<a class="btn btn-primary" href="/cancel_membership">Cancel</a>
+
+		</div>
+	</main>
+
+	{% elif user.is_authenticated and is_member and not user.paymentinfo.yearly_payment_due %}
 	<header style="padding-top: 100px;">
 		<h1>Membership and Payment</h1>
 	</header>
@@ -34,12 +58,7 @@
 			<h4>You have been a member since {{ user.date_joined }}!</h4>
 			<h4>Your membership will renew on January 1, 2024.</h4>
 			<h4>Your next membership charge will be due on March 1, 2024.</h4>
-			<h2>Pay Your Balance</h2>
-			{% if user.paymentinfo.initial_payment %}
-			<a class="btn btn-primary" href="/billing">Make a Payment</a>
-			{%else%}
-			<a class="btn btn-primary" href="/payment">Make a Payment</a>
-			{%endif%}
+			<h4>You have no outstanding balance.</h4>
 			<h2>Cancel Your Membership</h2>
 			<h4>You must cancel before October 1, 2023 to avoid extra fees.</h4>
 			<h4>This action CANNOT BE UNDONE.</h4>
